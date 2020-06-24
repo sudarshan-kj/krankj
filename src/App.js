@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo} color="white" className="App-logo" alt="logo" />
         <p>
           <code>Site is currently under development. Please come back on July 15th, 2020</code>
         </p>
