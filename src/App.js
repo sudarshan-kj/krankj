@@ -10,7 +10,7 @@ constructor(props){
 }
 
 toggleColors = () => {
-  var colors = ["#47fa00","#000000", "#00ddfa","#fac000","#ff0055"];
+  var colors = ["#47fa00","#282c34", "#00ddfa","#fac000","#ff0055"];
   this.setState(prevState =>  {
     var colorIndex = prevState.colorTracker + 1;
     colorIndex = colorIndex % (colors.length );
