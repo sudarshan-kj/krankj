@@ -1,6 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "./App.js";
+import "./index.css";
 
-const title = "My custom new react project";
-
-ReactDOM.render(<div>{title}</div>, document.getElementById("app"));
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
