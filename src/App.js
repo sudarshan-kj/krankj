@@ -1,8 +1,13 @@
 import React from "react";
 import styles from "./App.module.css";
+import LandingPage from "./components/LandingPage";
 
 const App = () => {
-  return <h1 className={styles.test}>Hello App</h1>;
+  return (
+    <div className={styles.appWrapper}>
+      <LandingPage />
+    </div>
+  );
 };
 
 export default App;
