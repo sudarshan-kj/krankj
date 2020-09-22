@@ -1,37 +1,50 @@
-.container {
-  display: flex;
-  justify-content: center;
+.mainContainer {
   color: rgb(201, 201, 201);
-  align-items: center;
+  height: 100vh;
 }
 
-.container .contentContainer {
-  border: 1px solid white;
+.contentContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-repeat: no-repeat;
+  background-image: linear-gradient(to right, #89abd1 100%, #89abd1 100%),
+    linear-gradient(to bottom, #89abd1 100%, #89abd1 100%),
+    linear-gradient(to right, #89abd1 100%, #89abd1 100%),
+    linear-gradient(to bottom, #89abd1 100%, #89abd1 100%);
+
+  background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+  width: 40%;
+  max-width: 460px;
+  animation: bg 1.2s cubic-bezier(0.19, 1, 0.22, 1) 1 forwards;
+  padding: 5rem;
 }
 
-.container h1 {
+.mainContainer h1 {
   font-weight: 400;
 }
 
-.gradientBorder {
-  --border-width: 3px;
-  display: flex;
-  flex-flow: column wrap;
-  padding: 5rem;
-  width: 100%;
-  color: white;
-  background: rgb(49, 49, 49);
-  border-radius: var(--border-width);
+@keyframes bg {
+  0% {
+    background-size: 0 1px, 1px 0, 0 1px, 1px 0;
+  }
+  25% {
+    background-size: 100% 1px, 1px 0, 0 1px, 1px 0;
+  }
+  50% {
+    background-size: 100% 1px, 1px 100%, 0 1px, 1px 0;
+  }
+  75% {
+    background-size: 100% 1px, 1px 100%, 100% 1px, 1px 0;
+  }
+  100% {
+    background-size: 100% 1px, 1px 100%, 100% 1px, 1px 100%;
+  }
 }
 
-.gradientBorder::after {
-  position: absolute;
+.gradientBorder {
   content: "";
-  top: calc(-1 * var(--border-width));
-  left: calc(-1 * var(--border-width));
-  z-index: -1;
-  width: calc(100% + var(--border-width) * 2);
-  height: calc(100% + var(--border-width) * 2);
   background: linear-gradient(
     60deg,
     hsl(224, 85%, 66%),
@@ -50,7 +63,7 @@
 }
 
 @keyframes moveGradient {
-  50% {
-    background-position: 10% 50%;
+  100% {
+    background-position: 1% 50%;
   }
 }

@@ -1,0 +1,33 @@
+ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  text-align: center;
+  flex: 1;
+  padding-top: 3rem;
+}
+
+li a {
+  color: rgb(192, 192, 192);
+  text-decoration: none;
+}
+
+li a:hover {
+  color: #89abd1;
+}
+
+@media screen and (min-width: 960px) {
+  li {
+    flex: 0;
+    margin: 1rem;
+    padding-top: 2rem;
+  }
+
+  ul {
+    padding-left: 2rem;
+  }
+}
