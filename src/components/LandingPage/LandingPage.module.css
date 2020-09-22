@@ -1,6 +1,10 @@
 .mainContainer {
-  color: rgb(201, 201, 201);
+  color: white;
   height: 100vh;
+}
+
+p:nth-child(3) {
+  color: yellow;
 }
 
 .contentContainer {
@@ -9,10 +13,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-repeat: no-repeat;
-  background-image: linear-gradient(to right, #89abd1 100%, #89abd1 100%),
-    linear-gradient(to bottom, #89abd1 100%, #89abd1 100%),
-    linear-gradient(to right, #89abd1 100%, #89abd1 100%),
-    linear-gradient(to bottom, #89abd1 100%, #89abd1 100%);
+  background-image: linear-gradient(to right, #ff0077 100%, #ff0077 100%),
+    linear-gradient(to bottom, #ff0077 100%, #ff0077 100%),
+    linear-gradient(to right, #ff0077 100%, #ff0077 100%),
+    linear-gradient(to bottom, #ff0077 100%, #ff0077 100%);
 
   background-position: 0 0, 100% 0, 100% 100%, 0 100%;
   width: 40%;

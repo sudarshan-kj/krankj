@@ -12,12 +12,12 @@ li {
 }
 
 li a {
-  color: rgb(192, 192, 192);
+  color: white;
   text-decoration: none;
 }
 
 li a:hover {
-  color: #89abd1;
+  color: #ff0077;
 }
 
 @media screen and (min-width: 960px) {
