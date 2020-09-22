@@ -38,16 +38,16 @@ module.exports = {
     extensions: ["*", ".js", ".jsx"],
   },
   output: {
-    path: __dirname + "/dist",
+    path: __dirname + "/public",
     publicPath: "/",
     filename: "bundle.js",
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({ template: "./dist/index.html" }),
+    new HtmlWebpackPlugin({ template: "./public/index.html" }),
   ],
   devServer: {
-    contentBase: "./dist",
+    contentBase: "./public",
     hot: true,
     open: true,
   },

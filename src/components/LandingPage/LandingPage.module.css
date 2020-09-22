@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  justify-content: center;
+  color: rgb(201, 201, 201);
+  align-items: center;
+}
+
+.container .contentContainer {
+  border: 1px solid white;
+}
+
+.container h1 {
+  font-weight: 400;
+}
+
+.gradientBorder {
+  --border-width: 3px;
+  display: flex;
+  flex-flow: column wrap;
+  padding: 5rem;
+  width: 100%;
+  color: white;
+  background: rgb(49, 49, 49);
+  border-radius: var(--border-width);
+}
+
+.gradientBorder::after {
+  position: absolute;
+  content: "";
+  top: calc(-1 * var(--border-width));
+  left: calc(-1 * var(--border-width));
+  z-index: -1;
+  width: calc(100% + var(--border-width) * 2);
+  height: calc(100% + var(--border-width) * 2);
+  background: linear-gradient(
+    60deg,
+    hsl(224, 85%, 66%),
+    hsl(269, 85%, 66%),
+    hsl(314, 85%, 66%),
+    hsl(359, 85%, 66%),
+    hsl(44, 85%, 66%),
+    hsl(89, 85%, 66%),
+    hsl(134, 85%, 66%),
+    hsl(179, 85%, 66%)
+  );
+  background-size: 300% 300%;
+  background-position: 0 50%;
+  border-radius: calc(2 * var(--border-width));
+  animation: moveGradient 4s alternate infinite;
+}
+
+@keyframes moveGradient {
+  50% {
+    background-position: 10% 50%;
+  }
+}
