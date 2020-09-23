@@ -10,7 +10,7 @@ module.exports = {
         use: ["babel-loader"],
       },
       {
-        test: /\.((c|sa|sc)ss)$/i,
+        test: /\.css$/,
         use: [
           "style-loader",
           {
@@ -24,6 +24,12 @@ module.exports = {
             },
           },
         ],
+        include: /\.module\.css$/,
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+        exclude: /\.module\.css$/,
       },
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
