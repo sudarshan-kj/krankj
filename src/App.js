@@ -4,10 +4,20 @@ import LandingPage from "./components/LandingPage";
 import Header from "./components/Header";
 
 const App = () => {
+  const [styleObj, setStyleObj] = React.useState({ backgroundColor: "black" });
+
+  const isDarkThemeFn = (isDark) => {
+    if (isDark) {
+      setStyleObj({ backgroundColor: "black" });
+    } else {
+      setStyleObj({ backgroundColor: "white" });
+    }
+  };
+
   return (
-    <div className={styles.appWrapper}>
+    <div style={styleObj} className={styles.appWrapper}>
       <LandingPage>
-        <Header />
+        <Header isDarkTheme={isDarkThemeFn} />
       </LandingPage>
     </div>
   );

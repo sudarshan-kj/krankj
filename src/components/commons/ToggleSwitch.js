@@ -1,10 +1,26 @@
 import React from "react";
 import styles from "./ToggleSwitch.module.css";
 
-const ToggleSwitch = ({ style }) => {
+const ToggleSwitch = ({ isDarkTheme, style }) => {
+  const [checked, setChecked] = React.useState(false);
+
+  React.useEffect(() => {
+    isDarkTheme(checked);
+  }, [checked]);
+
+  const toggleCheckedSwitch = () => {
+    setChecked((prev) => !prev);
+  };
   return (
     <div style={style} className={styles.container}>
-      Toggle Me
+      <label className={styles.switch}>
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={toggleCheckedSwitch}
+        />
+        <span className={`${styles.slider} ${styles.round}`}></span>
+      </label>
     </div>
   );
 };

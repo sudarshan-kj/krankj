@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Header.module.css";
 import ToggleSwitch from "../commons/ToggleSwitch";
 
-const Header = () => {
+const Header = ({ isDarkTheme }) => {
   return (
     <div className={styles.container}>
       <nav>
@@ -19,7 +19,7 @@ const Header = () => {
         </ul>
       </nav>
       <div className={styles.dummyContainer} />
-      <ToggleSwitch style={{ marginRight: "1rem" }} />
+      <ToggleSwitch isDarkTheme={isDarkTheme} style={{ marginRight: "1rem" }} />
     </div>
   );
 };
