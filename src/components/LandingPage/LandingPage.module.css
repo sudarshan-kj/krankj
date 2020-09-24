@@ -1,10 +1,5 @@
 .mainContainer {
-  color: white;
   height: 100vh;
-}
-
-p:nth-child(3) {
-  color: yellow;
 }
 
 .contentContainer {
@@ -19,10 +14,10 @@ p:nth-child(3) {
     linear-gradient(to bottom, #ff0077 100%, #ff0077 100%);
 
   background-position: 0 0, 100% 0, 100% 100%, 0 100%;
-  width: 40%;
+  width: 60%;
   max-width: 460px;
   animation: bg 1.2s cubic-bezier(0.19, 1, 0.22, 1) 1 forwards;
-  padding: 5rem;
+  padding: 2rem;
 }
 
 .mainContainer h1 {
@@ -69,5 +64,11 @@ p:nth-child(3) {
 @keyframes moveGradient {
   100% {
     background-position: 1% 50%;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .contentContainer {
+    padding: 5rem;
   }
 }

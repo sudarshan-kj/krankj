@@ -1,25 +1,36 @@
 import React from "react";
-import styles from "./App.module.css";
+import "./App.css";
 import LandingPage from "./components/LandingPage";
 import Header from "./components/Header";
+import { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme } from "./utils/Theme";
+import { GlobalStyles } from "./global/global";
 
 const App = () => {
-  const [styleObj, setStyleObj] = React.useState({ backgroundColor: "black" });
+  const [theme, setTheme] = React.useState("light");
 
-  const isDarkThemeFn = (isDark) => {
-    if (!isDark) {
-      setStyleObj({ backgroundColor: "black" });
+  const isFirstRun = React.useRef(true);
+  const isDarkTheme = (isDark) => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
+    if (isDark) {
+      setTheme("dark");
     } else {
-      setStyleObj({ backgroundColor: "white" });
+      setTheme("light");
     }
   };
 
   return (
-    <div style={styleObj} className={`${styles.appWrapper} ${styles.test}`}>
-      <LandingPage>
-        <Header isDarkTheme={isDarkThemeFn} />
-      </LandingPage>
-    </div>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <div className="appWrapper">
+        <GlobalStyles />
+        <LandingPage>
+          <Header isDarkTheme={isDarkTheme} />
+        </LandingPage>
+      </div>
+    </ThemeProvider>
   );
 };
 
