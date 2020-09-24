@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin"); //installed via npm
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
 module.exports = {
   entry: "./src/index.js",
@@ -12,7 +13,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          "style-loader",
+          MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
             options: {
@@ -28,7 +29,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
         exclude: /\.module\.css$/,
       },
       {
@@ -46,11 +47,12 @@ module.exports = {
   output: {
     path: __dirname + "/public",
     publicPath: "/",
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({ template: "./public/index.html" }),
+    new MiniCssExtractPlugin(),
   ],
   devServer: {
     contentBase: "./public",

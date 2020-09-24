@@ -15,7 +15,7 @@ const App = () => {
   };
 
   return (
-    <div style={styleObj} className={styles.appWrapper}>
+    <div style={styleObj} className={`${styles.appWrapper} ${styles.test}`}>
       <LandingPage>
         <Header isDarkTheme={isDarkThemeFn} />
       </LandingPage>
