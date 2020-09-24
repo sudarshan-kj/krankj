@@ -1,6 +1,6 @@
 .appWrapper {
-  --some-color: red;
   animation: fadeIn 1s;
+  transition: all 0.3s ease-in-out;
 }
 
 @keyframes fadeIn {

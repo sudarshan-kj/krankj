@@ -7,7 +7,7 @@ const App = () => {
   const [styleObj, setStyleObj] = React.useState({ backgroundColor: "black" });
 
   const isDarkThemeFn = (isDark) => {
-    if (isDark) {
+    if (!isDark) {
       setStyleObj({ backgroundColor: "black" });
     } else {
       setStyleObj({ backgroundColor: "white" });

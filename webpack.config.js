@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin"); //installed via npm
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const webpack = require("webpack");
 module.exports = {
   entry: "./src/index.js",
@@ -41,6 +42,10 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    minimize: false,
+    minimizer: [new CssMinimizerPlugin()],
+  },
   resolve: {
     extensions: ["*", ".js", ".jsx"],
   },
@@ -51,8 +56,11 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    //no need to mention <script/> tag in html
     new HtmlWebpackPlugin({ template: "./public/index.html" }),
+    //put css into a new file
     new MiniCssExtractPlugin(),
+    //compresses css using css nano
   ],
   devServer: {
     contentBase: "./public",
