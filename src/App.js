@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./utils/Theme";
 import { GlobalStyles } from "./global/global";
+import { Switch, Route } from "react-router-dom";
+import Gallery from "./components/Gallery";
 
 const App = () => {
   const [theme, setTheme] = React.useState("dark");
@@ -25,9 +27,15 @@ const App = () => {
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <div className="appWrapper">
         <GlobalStyles />
-        <LandingPage>
-          <Header isDarkTheme={isDarkTheme} />
-        </LandingPage>
+        <Header isDarkTheme={isDarkTheme} />
+        <Switch>
+          <Route path="/home">
+            <LandingPage />
+          </Route>
+          <Route path="/gallery">
+            <Gallery />
+          </Route>
+        </Switch>
       </div>
     </ThemeProvider>
   );

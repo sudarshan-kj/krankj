@@ -12,6 +12,7 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text};
     transition: all 0.25s linear; 
     animation: fadeIn 1s;
+    height: 100vh;
   }
 
   @keyframes fadeIn {

@@ -1,10 +1,13 @@
 .container {
   display: flex;
-  margin: 0 3rem;
   padding: 2rem 0;
 }
 .dummyContainer {
   flex: 4;
+}
+
+.dropDownButtonContainer ul {
+  display: block;
 }
 
 .toggleSwitch {
@@ -13,10 +16,13 @@
 
 ul {
   flex: 1;
-  display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+nav > ul {
+  display: none;
 }
 
 li {
@@ -34,5 +40,15 @@ li a:hover {
   color: #ff0077;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 550px) {
+  .container {
+    margin: 0 2rem;
+  }
+  nav > ul {
+    display: flex;
+  }
+
+  .dropDownButtonContainer {
+    display: none;
+  }
 }
