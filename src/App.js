@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import LandingPage from "./components/LandingPage";
 import Header from "./components/Header";
 import { ThemeProvider } from "styled-components";
@@ -7,18 +6,18 @@ import { lightTheme, darkTheme } from "./utils/Theme";
 import { GlobalStyles } from "./global/global";
 
 const App = () => {
-  const [theme, setTheme] = React.useState("light");
+  const [theme, setTheme] = React.useState("dark");
 
   const isFirstRun = React.useRef(true);
-  const isDarkTheme = (isDark) => {
+  const isDarkTheme = (isLight) => {
     if (isFirstRun.current) {
       isFirstRun.current = false;
       return;
     }
-    if (isDark) {
-      setTheme("dark");
-    } else {
+    if (isLight) {
       setTheme("light");
+    } else {
+      setTheme("dark");
     }
   };
 
