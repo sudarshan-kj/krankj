@@ -64,6 +64,11 @@ module.exports = {
   ],
   devServer: {
     contentBase: "./public",
+    historyApiFallback: true,
+    port: 8080,
+    public: "localhost:8080",
+    host: "0.0.0.0",
+    openPage: "home",
     hot: true,
     open: true,
   },
