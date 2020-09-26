@@ -1,11 +1,13 @@
 import React from "react";
-import LandingPage from "./components/LandingPage";
+import Main from "./components/Main";
+import Home from "./components/pages/Home";
 import Header from "./components/Header";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./utils/Theme";
 import { GlobalStyles } from "./global/global";
 import { Switch, Route } from "react-router-dom";
-import Gallery from "./components/Gallery";
+import Gallery from "./components/pages/Gallery";
+import Footer from "./components/Footer";
 
 const App = () => {
   const [theme, setTheme] = React.useState("dark");
@@ -28,14 +30,20 @@ const App = () => {
       <div className="appWrapper">
         <GlobalStyles />
         <Header isDarkTheme={isDarkTheme} />
-        <Switch>
-          <Route path="/home">
-            <LandingPage />
-          </Route>
-          <Route path="/gallery">
-            <Gallery />
-          </Route>
-        </Switch>
+        <Main>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/home">
+              <Home />
+            </Route>
+            <Route path="/gallery">
+              <Gallery />
+            </Route>
+          </Switch>
+        </Main>
+        <Footer />
       </div>
     </ThemeProvider>
   );

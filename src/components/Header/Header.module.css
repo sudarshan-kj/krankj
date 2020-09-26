@@ -1,6 +1,7 @@
 .container {
   display: flex;
-  padding: 2rem 0;
+  padding: 3rem 0;
+  height: 10vh;
 }
 .dummyContainer {
   flex: 4;
@@ -27,7 +28,7 @@ nav > ul {
 
 li {
   text-align: center;
-  margin: 1rem;
+  margin: 0 1rem;
   flex: 1;
 }
 
@@ -43,6 +44,11 @@ li a:hover {
 @media screen and (min-width: 550px) {
   .container {
     margin: 0 2rem;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
   }
   nav > ul {
     display: flex;

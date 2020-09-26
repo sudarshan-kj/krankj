@@ -1,8 +1,11 @@
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .contentContainer {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background-repeat: no-repeat;
   background-image: linear-gradient(to right, #ff0077 100%, #ff0077 100%),
     linear-gradient(to bottom, #ff0077 100%, #ff0077 100%),
@@ -10,14 +13,12 @@
     linear-gradient(to bottom, #ff0077 100%, #ff0077 100%);
 
   background-position: 0 0, 100% 0, 100% 100%, 0 100%;
-  width: 60%;
-  max-width: 460px;
-  animation: bg 1.2s cubic-bezier(0.19, 1, 0.22, 1) 1 forwards;
+  font-size: 1.5rem;
   padding: 2rem;
-}
+  margin: 3rem;
+  max-width: 460px;
 
-.mainContainer h1 {
-  font-weight: 400;
+  animation: bg 1.2s cubic-bezier(0.19, 1, 0.22, 1) 1 forwards;
 }
 
 @keyframes bg {
@@ -38,7 +39,7 @@
   }
 }
 
-.gradientBorder {
+/* .gradientBorder {
   content: "";
   background: linear-gradient(
     60deg,
@@ -61,7 +62,7 @@
   100% {
     background-position: 1% 50%;
   }
-}
+} */
 
 @media screen and (min-width: 960px) {
   .contentContainer {
