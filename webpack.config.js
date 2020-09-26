@@ -25,12 +25,31 @@ module.exports = {
               },
             },
           },
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: ["autoprefixer"],
+              },
+            },
+          },
         ],
         include: /\.module\.css$/,
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: ["autoprefixer"],
+              },
+            },
+          },
+        ],
         exclude: /\.module\.css$/,
       },
       {
@@ -68,7 +87,6 @@ module.exports = {
     port: 8080,
     public: "localhost:8080",
     host: "0.0.0.0",
-    openPage: "home",
     hot: true,
     open: true,
   },
