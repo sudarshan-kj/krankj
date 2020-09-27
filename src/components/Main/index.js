@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const StyledDiv = styled.div`
   margin: 0;
-  padding: 3rem;
+  padding: 0rem;
   height: 80vh;
 `;
 
