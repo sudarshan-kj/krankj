@@ -6,10 +6,11 @@ const Gallery = () => {
   const [imageLoading, setImageLoading] = React.useState(true);
 
   const imageLoaded = () => {
+    console.log("Image loaded");
     setImageLoading(false);
   };
 
-  const Image = () => {
+  const EnhancedImage = (props) => {
     return (
       <>
         <p style={imageLoading ? { display: "block" } : { display: "none" }}>
@@ -17,9 +18,7 @@ const Gallery = () => {
         </p>
         <img
           style={imageLoading ? { display: "none" } : { display: "inline" }}
-          src={myPhoto}
-          alt="myPhoto"
-          onLoad={imageLoaded}
+          {...props}
         />
       </>
     );
@@ -28,12 +27,12 @@ const Gallery = () => {
   return (
     <div className={styles.container}>
       <div className={styles.imageLayout}>
-        <Image />
-        <Image />
-        <Image />
-        <Image />
-        <Image />
-        <Image />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
       </div>
     </div>
   );
