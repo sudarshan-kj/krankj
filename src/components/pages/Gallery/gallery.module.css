@@ -1,24 +1,61 @@
+/* "@import from ../../../global/variables.css" */
+
 .container {
-  width: 90%;
+  width: 85%;
+  height: 100%;
   margin: 0 auto;
+  overflow: auto;
 }
 
 .imageLayout {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  gap: 20px;
 }
 
-img {
-  padding: 0px;
-  width: 100px;
-  height: 100px;
+.imageContainer {
+  position: relative;
+  border: 1px solid rgb(155, 155, 155);
+  padding-top: 100%;
+}
+
+.imageContainer p {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -100%);
+  animation: fadeIn 0.5s;
+}
+
+.imageContainer img {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
   object-fit: cover;
+  animation: fadeIn 1s;
+}
+
+.bottomOffsetCover {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: #1b1b1b;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media screen and (min-width: 960px) {
   .container {
-    width: 70%;
     margin: 0 auto;
     max-width: 960px;
   }

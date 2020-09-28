@@ -6,13 +6,12 @@ const Gallery = () => {
   const [imageLoading, setImageLoading] = React.useState(true);
 
   const imageLoaded = () => {
-    console.log("Image loaded");
     setImageLoading(false);
   };
 
   const EnhancedImage = (props) => {
     return (
-      <>
+      <div className={styles.imageContainer}>
         <p style={imageLoading ? { display: "block" } : { display: "none" }}>
           Loading...
         </p>
@@ -20,7 +19,7 @@ const Gallery = () => {
           style={imageLoading ? { display: "none" } : { display: "inline" }}
           {...props}
         />
-      </>
+      </div>
     );
   };
 
@@ -33,7 +32,20 @@ const Gallery = () => {
         <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
         <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
         <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
+        <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
       </div>
+      <div className={styles.bottomOffsetCover} />
     </div>
   );
 };
