@@ -1,4 +1,4 @@
-/* "@import from ../../../global/variables.css" */
+@import "../../../global/variables.css";
 
 .container {
   width: 85%;
@@ -42,7 +42,7 @@
   left: 0;
   right: 0;
   height: 30px;
-  background: #1b1b1b;
+  background: var(--background-dark);
 }
 
 @keyframes fadeIn {
