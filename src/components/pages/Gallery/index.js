@@ -2,6 +2,15 @@ import React from "react";
 import styles from "./gallery.module.css";
 import styled from "styled-components";
 import myPhoto from "../../../assets/images/girl.jpg";
+import { css } from "@emotion/core";
+import Loader from "react-spinners/PulseLoader";
+
+const override = css`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 const Gallery = () => {
   const [imageLoading, setImageLoading] = React.useState(true);
@@ -13,9 +22,12 @@ const Gallery = () => {
   const EnhancedImage = (props) => {
     return (
       <div className={styles.imageContainer}>
-        <p style={imageLoading ? { display: "block" } : { display: "none" }}>
-          Loading...
-        </p>
+        <Loader
+          className={styles.loader}
+          css={override}
+          color={"#a1a1a1"}
+          loading={imageLoading}
+        />
         <img
           style={imageLoading ? { display: "none" } : { display: "inline" }}
           {...props}

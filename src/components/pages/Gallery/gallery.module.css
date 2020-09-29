@@ -7,6 +7,10 @@
   overflow: auto;
 }
 
+.loader {
+  background: red;
+}
+
 .imageLayout {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
@@ -15,16 +19,11 @@
 
 .imageContainer {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid var(--gallery-page-box-border-color);
   padding-top: 100%;
-}
-
-.imageContainer p {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -100%);
-  animation: fadeIn 0.5s;
 }
 
 .imageContainer img {
