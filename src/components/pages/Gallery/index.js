@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./gallery.module.css";
+import styled from "styled-components";
 import myPhoto from "../../../assets/girl.jpg";
 
 const Gallery = () => {
@@ -23,6 +24,15 @@ const Gallery = () => {
     );
   };
 
+  const BottomOffsetCover = styled.div`
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: ${({ theme }) => theme.body};
+  `;
+
   return (
     <div className={styles.container}>
       <div className={styles.imageLayout}>
@@ -45,7 +55,7 @@ const Gallery = () => {
         <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
         <EnhancedImage src={myPhoto} alt="myPhoto" onLoad={imageLoaded} />
       </div>
-      <div className={styles.bottomOffsetCover} />
+      <BottomOffsetCover />
     </div>
   );
 };
