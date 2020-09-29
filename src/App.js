@@ -9,6 +9,9 @@ import { Switch, Route } from "react-router-dom";
 import Gallery from "./components/pages/Gallery";
 import Footer from "./components/Footer";
 import usePersistence from "./hooks/usePersistence";
+import ScrollToTop from "react-scroll-up";
+import UpArrow from "./assets/icons/left-arrow.svg";
+import styled from "styled-components";
 
 const App = () => {
   const [userTheme, setUserTheme] = usePersistence("userTheme", "dark");
@@ -22,6 +25,13 @@ const App = () => {
     if (isLight) setUserTheme("light");
     else setUserTheme("dark");
   };
+
+  const StyledUpArrow = styled(UpArrow)`
+    fill: ${({ theme }) => theme.text};
+    height: 20px;
+    width: 20px;
+    transform: rotate(90deg);
+  `;
 
   return (
     <ThemeProvider theme={userTheme === "light" ? lightTheme : darkTheme}>
@@ -41,6 +51,9 @@ const App = () => {
             </Route>
           </Switch>
         </Main>
+        <ScrollToTop showUnder={160}>
+          <StyledUpArrow />
+        </ScrollToTop>
         <Footer />
       </div>
     </ThemeProvider>
