@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Main from "./components/Main";
 import Home from "./components/pages/Home";
 import Header from "./components/Header";
@@ -8,28 +8,26 @@ import { GlobalStyles } from "./global/global";
 import { Switch, Route } from "react-router-dom";
 import Gallery from "./components/pages/Gallery";
 import Footer from "./components/Footer";
+import usePersistence from "./hooks/usePersistence";
 
 const App = () => {
-  const [theme, setTheme] = React.useState("dark");
+  const [userTheme, setUserTheme] = usePersistence("userTheme", "dark");
 
-  const isFirstRun = React.useRef(true);
-  const isDarkTheme = (isLight) => {
+  const isFirstRun = useRef(true);
+  const isLightTheme = (isLight) => {
     if (isFirstRun.current) {
       isFirstRun.current = false;
       return;
     }
-    if (isLight) {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
+    if (isLight) setUserTheme("light");
+    else setUserTheme("dark");
   };
 
   return (
-    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+    <ThemeProvider theme={userTheme === "light" ? lightTheme : darkTheme}>
       <div className="appWrapper">
         <GlobalStyles />
-        <Header isDarkTheme={isDarkTheme} />
+        <Header isLightTheme={isLightTheme} />
         <Main>
           <Switch>
             <Route exact path="/">

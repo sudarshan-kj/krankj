@@ -1,4 +1,5 @@
 export const lightTheme = {
+  isLight: true,
   body: "#f9f9f9",
   text: "#363537",
   toggleBorder: "#FFF",
@@ -6,6 +7,7 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
+  isLight: false,
   body: "#1b1b1b;",
   text: "#FAFAFA",
   toggleBorder: "#6B8096",

@@ -3,7 +3,7 @@ import styles from "./Header.module.css";
 import ToggleSwitch from "../commons/ToggleSwitch";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
-const Header = ({ isDarkTheme }) => {
+const Header = ({ isLightTheme }) => {
   const handleNavModal = () => {
     console.log("Clicked me");
   };
@@ -34,7 +34,10 @@ const Header = ({ isDarkTheme }) => {
       </nav>
 
       <div className={styles.dummyContainer} />
-      <ToggleSwitch isDarkTheme={isDarkTheme} style={{ marginRight: "1rem" }} />
+      <ToggleSwitch
+        isLightTheme={isLightTheme}
+        style={{ marginRight: "1rem" }}
+      />
     </div>
   );
 };

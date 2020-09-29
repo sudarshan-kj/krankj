@@ -1,4 +1,6 @@
 :root {
   --hover-color: #ff0077;
+  --home-page-box-border-color: #ff0077;
+  --gallery-page-box-border-color: none;
   --background-dark: #1b1b1b;
 }

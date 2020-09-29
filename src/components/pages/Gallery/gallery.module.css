@@ -15,7 +15,7 @@
 
 .imageContainer {
   position: relative;
-  border: 1px solid rgb(155, 155, 155);
+  border: 1px solid var(--gallery-page-box-border-color);
   padding-top: 100%;
 }
 

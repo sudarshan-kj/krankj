@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./gallery.module.css";
 import styled from "styled-components";
-import myPhoto from "../../../assets/girl.jpg";
+import myPhoto from "../../../assets/images/girl.jpg";
 
 const Gallery = () => {
   const [imageLoading, setImageLoading] = React.useState(true);

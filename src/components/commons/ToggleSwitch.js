@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./ToggleSwitch.module.css";
+import { ThemeContext } from "styled-components";
 
-const ToggleSwitch = ({ isDarkTheme, style }) => {
-  const [checked, setChecked] = React.useState(false);
+const ToggleSwitch = ({ isLightTheme, style }) => {
+  const themeContext = useContext(ThemeContext);
+  const [checked, setChecked] = React.useState(themeContext.isLight);
 
   React.useEffect(() => {
-    isDarkTheme(checked);
+    isLightTheme(checked);
   }, [checked]);
 
   const toggleCheckedSwitch = () => {
