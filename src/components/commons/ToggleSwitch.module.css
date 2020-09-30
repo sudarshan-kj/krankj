@@ -1,3 +1,5 @@
+@import "../../global/variables.css";
+
 .container {
   display: flex;
   justify-content: center;
@@ -41,7 +43,7 @@
 }
 
 input:checked + .slider {
-  background-color: #ff0077;
+  background-color: var(--toggleButton-bg-color);
 }
 
 input:checked + .slider:before {
