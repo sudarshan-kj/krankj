@@ -3,7 +3,7 @@ import styles from "./gallery.module.css";
 import styled from "styled-components";
 import { css } from "@emotion/core";
 import Loader from "react-spinners/PulseLoader";
-import images from "../../../assets/lowresimages";
+import images from "../../../assets/images";
 
 const override = css`
   position: absolute;
