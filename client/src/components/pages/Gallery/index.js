@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { css } from "@emotion/core";
 import Loader from "react-spinners/PulseLoader";
 import images from "../../../assets/images";
+import axios from "axios";
 
 const override = css`
   position: absolute;
@@ -23,12 +24,24 @@ const BottomOffsetCover = styled.div`
 
 const Gallery = () => {
   const [imageLoading, setImageLoading] = React.useState(true);
+  const [serverResponse, setServerResponse] = React.useState("");
 
   const imageLoaded = () => {
     setImageLoading(false);
   };
 
   const imgRef = React.useRef();
+
+  function callServer() {
+    axios
+      .get("http://localhost:9000/testAPI")
+      .then((res) => setServerResponse(res.data.key))
+      .catch((err) => err);
+  }
+
+  React.useEffect(() => {
+    callServer();
+  });
 
   React.useEffect(() => {
     const handleContextMenu = (event) => {
@@ -73,6 +86,7 @@ const Gallery = () => {
           );
         })}
       </div>
+      <p>{`Response from server is: ${serverResponse}`}</p>
       <BottomOffsetCover />
     </div>
   );
