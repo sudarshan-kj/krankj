@@ -35,13 +35,16 @@ const Gallery = () => {
   function callServer() {
     axios
       .get("http://localhost:9000/testAPI")
-      .then((res) => setServerResponse(res.data.key))
-      .catch((err) => err);
+      .then((res) => {
+        console.log("Response is", res.data);
+        setServerResponse(res.data.key);
+      })
+      .catch((err) => setServerResponse("<Error loading data>"));
   }
 
   React.useEffect(() => {
     callServer();
-  });
+  }, []);
 
   React.useEffect(() => {
     const handleContextMenu = (event) => {
