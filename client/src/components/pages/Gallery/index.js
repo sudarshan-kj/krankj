@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { css } from "@emotion/core";
 import Loader from "react-spinners/PulseLoader";
 import images from "../../../assets/images";
+import { API_ENDPOINT } from "../../../constants";
 import axios from "axios";
 
 const override = css`
@@ -34,9 +35,8 @@ const Gallery = () => {
 
   function callServer() {
     axios
-      .get("http://localhost:9000/testAPI")
+      .get(`${API_ENDPOINT}/api/testAPI`)
       .then((res) => {
-        console.log("Response is", res.data);
         setServerResponse(res.data.key);
       })
       .catch((err) => setServerResponse("<Error loading data>"));
