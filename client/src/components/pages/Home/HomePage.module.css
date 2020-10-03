@@ -14,35 +14,39 @@ h1 {
   font-size: 2.8rem;
 }
 
+.moreLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.moreLink:hover {
+  color: var(--hover-color);
+}
+
 .contentContainer {
   background-repeat: no-repeat;
   background-image: linear-gradient(
-      to right,
-      var(--home-page-box-border-color) 100%,
-      var(--home-page-box-border-color) 100%
+      var(--home-page-box-border-color),
+      var(--home-page-box-border-color)
     ),
     linear-gradient(
-      to bottom,
-      var(--home-page-box-border-color) 100%,
-      var(--home-page-box-border-color) 100%
+      var(--home-page-box-border-color),
+      var(--home-page-box-border-color)
     ),
     linear-gradient(
-      to right,
-      var(--home-page-box-border-color) 100%,
-      var(--home-page-box-border-color) 100%
+      var(--home-page-box-border-color),
+      var(--home-page-box-border-color)
     ),
     linear-gradient(
-      to bottom,
-      var(--home-page-box-border-color) 100%,
-      var(--home-page-box-border-color) 100%
+      var(--home-page-box-border-color),
+      var(--home-page-box-border-color)
     );
 
   background-position: 0 0, 100% 0, 100% 100%, 0 100%;
   font-size: 1.5rem;
   padding: 2rem;
   margin: 3rem;
-  max-width: 460px;
-
+  width: 800px;
   animation: bg 1.2s cubic-bezier(0.19, 1, 0.22, 1) 1 forwards;
 }
 

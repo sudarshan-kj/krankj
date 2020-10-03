@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Header.module.css";
 import ToggleSwitch from "../commons/ToggleSwitch";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = ({ isLightTheme }) => {
   const handleNavModal = () => {
