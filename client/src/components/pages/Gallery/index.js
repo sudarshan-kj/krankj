@@ -35,7 +35,7 @@ const Gallery = () => {
 
   function callServer() {
     axios
-      .get(`${API_ENDPOINT}/api/testAPI`)
+      .get(`${API_ENDPOINT}/api/gallery`)
       .then((res) => {
         setServerResponse(res.data.key);
       })

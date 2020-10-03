@@ -12,7 +12,7 @@ app.get("/api/hello", (req, res) => {
   res.send({ express: "Hello From Express" });
 });
 
-app.get("/api/testAPI", (req, res) => {
+app.get("/api/gallery", (req, res) => {
   res.send({ key: "Srinivas and Sudarshan" });
 });
 
