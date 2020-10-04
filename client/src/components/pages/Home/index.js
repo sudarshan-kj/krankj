@@ -24,8 +24,6 @@ const HomePage = () => (
           alt="sudarshan"
         />
       </section>
-      {/* <p>My core is to build and create.</p> */}
-      {/* <p>Believe in fulfillment through involvement.</p> */}
     </div>
   </div>
 );

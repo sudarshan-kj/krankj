@@ -12,23 +12,44 @@
 
 .contentContainer {
   border: 2px solid var(--box-border-color);
-  padding: 1.5rem;
+  padding: 2rem;
   margin: 1rem;
   width: 700px;
-  height: 382px;
+  font-size: 1.2rem;
+  animation: slideIn 0.75s;
 }
 
-.contentContainer p {
-  animation: slideIn 1s;
+.contentContainer h1 {
+  margin-top: 0;
+}
+
+.contentContainer ul {
+  list-style-type: none;
+}
+
+.contentContainer ul li {
+  text-align: left;
+}
+
+.contentContainer ul li::before {
+  content: "-";
+  position: absolute;
+  /*change margin to move dash around*/
+  margin-left: -1.2rem;
 }
 
 @keyframes slideIn {
   from {
-    transform: translate(50px);
+    transform: translate(45px);
     opacity: 0;
   }
   to {
-    transform: translate(0px);
     opacity: 1;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .contentContainer {
+    padding: 3rem;
   }
 }

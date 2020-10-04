@@ -8,11 +8,11 @@
   left: 0;
   right: 0;
   position: absolute;
+  animation: slideIn 1s;
 }
 
 .introSection {
   flex: 1 0 200px;
-  animation: slideIn 1s;
 }
 
 h1 {
@@ -45,12 +45,12 @@ h1 {
   padding: 1.5rem;
   margin: 1.5rem;
   width: 700px;
-  animation: bg 1.2s cubic-bezier(0.19, 1, 0.22, 1) 1 forwards;
+  animation: bg 1.4s cubic-bezier(0.19, 1, 0.22, 1) 1 forwards;
 }
 
 @keyframes slideIn {
   from {
-    transform: translate(50px);
+    transform: translate(45px);
     opacity: 0;
   }
   to {
@@ -82,7 +82,6 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: slideIn 1s;
 }
 
 .profilePicutreImg {
@@ -90,7 +89,6 @@ h1 {
   width: 150px;
   border-radius: 50%;
   object-fit: cover;
-  animation: fadeIn 1s;
 }
 
 @keyframes fadeIn {

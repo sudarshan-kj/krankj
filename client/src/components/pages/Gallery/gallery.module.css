@@ -5,6 +5,7 @@
   height: 100%;
   margin: 0 auto;
   overflow: auto;
+  animation: slideIn 1s;
 }
 
 .loader {
@@ -32,7 +33,6 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
-  animation: fadeIn 1s;
 }
 
 .bottomOffsetCover {
@@ -42,6 +42,16 @@
   right: 0;
   height: 30px;
   background: var(--background-dark);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translate(45px);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeIn {
