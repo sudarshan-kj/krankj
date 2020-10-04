@@ -12,6 +12,7 @@
 
 .introSection {
   flex: 1 0 200px;
+  animation: slideIn 1s;
 }
 
 h1 {
@@ -32,21 +33,12 @@ h1 {
   flex-flow: row wrap;
   background-repeat: no-repeat;
   background-image: linear-gradient(
-      var(--home-page-box-border-color),
-      var(--home-page-box-border-color)
+      var(--box-border-color),
+      var(--box-border-color)
     ),
-    linear-gradient(
-      var(--home-page-box-border-color),
-      var(--home-page-box-border-color)
-    ),
-    linear-gradient(
-      var(--home-page-box-border-color),
-      var(--home-page-box-border-color)
-    ),
-    linear-gradient(
-      var(--home-page-box-border-color),
-      var(--home-page-box-border-color)
-    );
+    linear-gradient(var(--box-border-color), var(--box-border-color)),
+    linear-gradient(var(--box-border-color), var(--box-border-color)),
+    linear-gradient(var(--box-border-color), var(--box-border-color));
 
   background-position: 0 0, 100% 0, 100% 100%, 0 100%;
   font-size: 1.5rem;
@@ -54,6 +46,17 @@ h1 {
   margin: 1.5rem;
   width: 700px;
   animation: bg 1.2s cubic-bezier(0.19, 1, 0.22, 1) 1 forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translate(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0px);
+    opacity: 1;
+  }
 }
 
 @keyframes bg {
@@ -79,6 +82,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: slideIn 1s;
 }
 
 .profilePicutreImg {

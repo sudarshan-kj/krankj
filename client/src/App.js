@@ -7,6 +7,7 @@ import { lightTheme, darkTheme } from "./utils/Theme";
 import { GlobalStyles } from "./global/global";
 import { Switch, Route } from "react-router-dom";
 import Gallery from "./components/pages/Gallery";
+import About from "./components/pages/About";
 import Footer from "./components/Footer";
 import usePersistence from "./hooks/usePersistence";
 import ScrollToTop from "react-scroll-up";
@@ -48,6 +49,9 @@ const App = () => {
             </Route>
             <Route path="/gallery">
               <Gallery />
+            </Route>
+            <Route path="/about">
+              <About />
             </Route>
           </Switch>
         </Main>
