@@ -8,7 +8,6 @@
   left: 0;
   right: 0;
   position: absolute;
-  animation: slideIn 1s;
 }
 
 .introSection {
@@ -29,8 +28,6 @@ h1 {
 }
 
 .contentContainer {
-  display: flex;
-  flex-flow: row wrap;
   background-repeat: no-repeat;
   background-image: linear-gradient(
       var(--box-border-color),
@@ -46,6 +43,12 @@ h1 {
   margin: 1.5rem;
   width: 700px;
   animation: bg 1.4s cubic-bezier(0.19, 1, 0.22, 1) 1 forwards;
+}
+
+.animatedContainer {
+  display: flex;
+  flex-flow: row wrap;
+  animation: slideIn 1s;
 }
 
 @keyframes slideIn {
