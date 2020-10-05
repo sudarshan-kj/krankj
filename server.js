@@ -3,6 +3,26 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 9000;
+const rateLimit = require("express-rate-limit");
+
+const getApiLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 60 minutes
+  max: 500,
+  message: {
+    error: "Too many requests. Please try again later",
+  },
+});
+
+const postApiLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 60 minutes
+  max: 3,
+  message: {
+    error: "Too many submissions. Please submit again after an hour.",
+  },
+});
+
+app.get("/api/*", getApiLimiter);
+app.post("/api/*", postApiLimiter);
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -16,11 +36,12 @@ app.get("/api/gallery", (req, res) => {
   res.send({ key: "Srinivas and Sudarshan" });
 });
 
+let msg = {
+  key: "value",
+};
+
 app.post("/api/world", (req, res) => {
-  console.log(req.body);
-  res.send(
-    `I received your POST request. This is what you sent me: ${req.body.post}`
-  );
+  res.send(msg);
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
