@@ -40,13 +40,11 @@ const postApiLimiter = rateLimit({
   },
 });
 
-app.get("/api/*", getApiLimiter);
-app.post("/api/*", postApiLimiter);
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.get("/api/*", getApiLimiter);
+app.post("/api/*", postApiLimiter);
 app.get("/api/hello", (req, res) => {
   res.send({ express: "Hello From Express" });
 });
@@ -63,7 +61,7 @@ app.post("/api/world", (req, res) => {
   res.send(msg);
 });
 
-app.post("/api/contact", function (request, response) {
+app.post("/api/contact/submit", function (request, response) {
   let u = new User({
     email: request.body.email,
     name: request.body.name,
