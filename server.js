@@ -74,7 +74,7 @@ app.post("/api/contact", function (request, response) {
     if (err) throw err;
     else console.log("Successfully saved user");
   });
-  response.send({ msg: " ok" });
+  response.send({ msg: "submitted" });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

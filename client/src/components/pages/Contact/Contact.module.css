@@ -1,0 +1,29 @@
+@import "../../../global/variables.css";
+
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  left: 0;
+  right: 0;
+  position: absolute;
+}
+
+.mainContainer form label {
+  display: block;
+}
+
+.mainContainer form {
+  animation: slideIn 1s;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translate(50px);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

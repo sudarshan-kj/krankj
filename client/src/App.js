@@ -13,6 +13,7 @@ import usePersistence from "./hooks/usePersistence";
 import ScrollToTop from "react-scroll-up";
 import UpArrow from "./assets/icons/left-arrow.svg";
 import styled from "styled-components";
+import Contact from "./components/pages/Contact";
 
 const StyledUpArrow = styled(UpArrow)`
   fill: ${({ theme }) => theme.text};
@@ -52,6 +53,9 @@ const App = () => {
             </Route>
             <Route path="/about">
               <About />
+            </Route>
+            <Route path="/contact">
+              <Contact />
             </Route>
           </Switch>
         </Main>
