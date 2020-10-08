@@ -27,7 +27,7 @@ const Contact = () => {
 
   return (
     <div className={styles.mainContainer}>
-      <form onSubmit={formik.handleSubmit}>
+      <form className={styles.form} onSubmit={formik.handleSubmit}>
         <ul>
           <li>
             <label htmlFor="name">Name</label>

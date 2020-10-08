@@ -10,16 +10,46 @@
   position: absolute;
 }
 
-.mainContainer form label {
-  margin-right: 1rem;
+.form {
+  width: 300px;
+}
+
+.mainContainer .form label {
+  margin-bottom: 2.5rem;
   font-size: 0.9rem;
 }
 
-.mainContainer form li {
+.mainContainer .form li {
+  text-align: left;
   margin: 1rem;
 }
 
-.mainContainer form {
+.mainContainer > .form input {
+  background-color: #2b2b2b;
+  font-family: inherit;
+  font-size: 0.8rem;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid rgb(119, 119, 119);
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+.mainContainer .form button {
+  width: 100%;
+  background-color: #db6505;
+  color: white;
+  padding: 0.6rem;
+  margin: 0.5rem 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.mainContainer .form button:hover {
+  background-color: #b45100;
+}
+.mainContainer .form {
   animation: slideIn 1s;
 }
 
