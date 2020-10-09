@@ -26,8 +26,9 @@
 
 .mainContainer > .form input {
   background-color: inherit;
+  color: inherit;
   font-family: inherit;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   width: 100%;
   padding: 0.5rem;
   border: 1px solid rgb(119, 119, 119);
@@ -51,6 +52,12 @@
 }
 .mainContainer .form {
   animation: slideIn 1s;
+}
+
+.errorMsg {
+  margin-top: 1rem;
+  color: rgb(179, 0, 0);
+  font-size: 0.7rem;
 }
 
 @keyframes slideIn {
