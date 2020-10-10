@@ -1,30 +1,19 @@
 import React from "react";
 import styles from "./Contact.module.css";
 import { useFormik } from "formik";
+import * as Yup from 'yup';
 import axios from "axios";
 import { API_ENDPOINT } from "../../../constants";
 
+const MAX_NAME_LENGTH = 35;
+const MAX_EMAIL_LENGTH = 45;
 
-const validate = values => {
-  const errors = {};
-  if(!values.name){
-    errors.name = "Name is required"
-  } else if(values.name.length > 25){
-    errors.name = "Use a shorter name"
-  }
-  
-  if (!values.email) {
-    errors.email = 'Email is Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
-  }
-
-  if(values.email.length > 35){
-    errors.email = "Use a shorter email address"
-  }
-
-  return errors;
-};
+const yupValidationObject = Yup.object({
+  name: Yup.string()
+    .max(MAX_NAME_LENGTH, 'Ah! That\'s too long! Try a bit shorter')
+    .required('Please fill your name'),
+  email:  Yup.string().max(MAX_EMAIL_LENGTH, 'That email is way too long.').email('That doesn\'t look like an email address').required('Please fill your email'),
+});
 
 const Contact = () => {
   const postData = (values) => {
@@ -40,7 +29,7 @@ const Contact = () => {
     initialValues: {
       email: "",
       name: "",
-    },validate,
+    }, validationSchema: yupValidationObject,
     onSubmit: (values, { resetForm }) => {
       postData(values);
       resetForm({ values: "" });
@@ -58,12 +47,15 @@ const Contact = () => {
               name="name"
               type="text"
               onChange={ e => {
-                if (e.target.value.length <= 26)
+                if (e.target.value.length <= MAX_NAME_LENGTH + 1)
                 formik.handleChange(e)
               }}
+              onBlur={formik.handleBlur}
               value={formik.values.name}
             />
-            {formik.errors.name ? <div className={styles.errorMsg}>{formik.errors.name}</div> : null}
+          {formik.touched.name && formik.errors.name ? (
+         <div className={styles.errorMsg}>{formik.errors.name}</div> 
+       ) : null}
           </li>
           <li>
             <label htmlFor="email">Email</label>
@@ -72,12 +64,15 @@ const Contact = () => {
               name="email"
               type="email"
               onChange={ e => {
-                if (e.target.value.length <= 36)
+                if (e.target.value.length <= MAX_EMAIL_LENGTH + 1)
                 formik.handleChange(e)
               }}
+              onBlur={formik.handleBlur}
               value={formik.values.email}
             />
-            {formik.errors.email ? <div className={styles.errorMsg}>{formik.errors.email}</div> : null}
+            {formik.touched.email && formik.errors.email ? (
+         <div className={styles.errorMsg}>{formik.errors.email}</div> 
+       ) : null}
           </li>
           <li>
             <button type="submit">Submit</button>
