@@ -5,6 +5,7 @@ const app = express();
 const port = process.env.PORT || 9000;
 const mongoose = require("mongoose");
 const rateLimit = require("express-rate-limit");
+const email = require("./email");
 
 let mongoDB = "mongodb://127.0.0.1/test";
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -73,6 +74,7 @@ app.post("/api/contact/submit", function (request, response) {
     else console.log("Successfully saved user");
   });
   response.send({ msg: "submitted" });
+  email.send(request.body);
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
