@@ -2,7 +2,7 @@ const sgMail = require('@sendgrid/mail');
 
 module.exports = {
     send: function(props){
-        sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const msg = {
   to: 'kjsudi@gmail.com',
   from: 'alerts@krankj.in', // Use the email address or domain you verified above
@@ -16,6 +16,10 @@ const msg = {
      width: 100%;
      padding: 10px;
      font-family: Arial, Helvetica, sans-serif;
+   }
+
+   p{
+     margin-right: 10px;
    }
    </style>
    </head>
