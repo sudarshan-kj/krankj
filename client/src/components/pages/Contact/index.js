@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "./Contact.module.css";
-import { useFormik, Field } from "formik";
+import { useFormik } from "formik";
 import * as Yup from 'yup';
 import axios from "axios";
 import { API_ENDPOINT } from "../../../constants";
+import AnimatedTick from "../../../utils/AnimatedTick";
 
 const MAX_NAME_LENGTH = 35;
 const MAX_EMAIL_LENGTH = 45;
@@ -18,10 +19,13 @@ const yupValidationObject = Yup.object({
 });
 
 const Contact = () => {
+  const [submitDone, setSubmitDone] =  React.useState(false);
   const postData = (values) => {
     axios
       .post(`${API_ENDPOINT}/api/contact/submit`, values)
-      .then((res) => console.log(res.data.msg))
+      .then((res) => {
+        setSubmitDone(prevValue => !prevValue);
+        console.log(res.data.msg)})
       .catch((err) =>
         console.log("Error occurred while submittin the form data", err)
       );
@@ -39,66 +43,71 @@ const Contact = () => {
     },
   });
 
-  return (
-    <div className={styles.mainContainer}>
-      <form className={styles.form} onSubmit={formik.handleSubmit}>
-        <ul>
-          <li>
-            <label htmlFor="name">Name</label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              onChange={ e => {
-                if (e.target.value.length <= MAX_NAME_LENGTH + 1)
-                formik.handleChange(e)
-              }}
-              onBlur={formik.handleBlur}
-              value={formik.values.name}
-            />
-          {formik.touched.name && formik.errors.name ? (
-         <div className={styles.errorMsg}>{formik.errors.name}</div> 
-       ) : null}
-          </li>
-          <li>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              onChange={ e => {
-                if (e.target.value.length <= MAX_EMAIL_LENGTH + 1)
-                formik.handleChange(e)
-              }}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-            />
-            {formik.touched.email && formik.errors.email ? (
-         <div className={styles.errorMsg}>{formik.errors.email}</div> 
-       ) : null}
-          </li>
-          <li>
-            <label htmlFor="message">Message</label>
-            <textarea 
-            name="message" 
-            id="message" 
-            value={formik.values.message} 
+
+   return (<div className={styles.mainContainer}>
+     {!submitDone &&
+    <form className={styles.form} onSubmit={formik.handleSubmit}>
+      <ul>
+        <li>
+          <label htmlFor="name">Name</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
             onChange={ e => {
-                if (e.target.value.length <= MAX_MESSAGE_LENGTH + 1)
-                formik.handleChange(e)
-              }}
-            onBlur={formik.handleBlur}/>
-          {formik.touched.message && formik.errors.message ? (
-         <div className={styles.errorMsg}>{formik.errors.message}</div> 
-       ) : null}
-                 </li>
-          <li>
-            <button type="submit">Submit</button>
-          </li>
-        </ul>
-      </form>
-    </div>
-  );
+              if (e.target.value.length <= MAX_NAME_LENGTH + 1)
+              formik.handleChange(e)
+            }}
+            onBlur={formik.handleBlur}
+            value={formik.values.name}
+          />
+        {formik.touched.name && formik.errors.name ? (
+       <div className={styles.errorMsg}>{formik.errors.name}</div> 
+     ) : null}
+        </li>
+        <li>
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            onChange={ e => {
+              if (e.target.value.length <= MAX_EMAIL_LENGTH + 1)
+              formik.handleChange(e)
+            }}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+          />
+          {formik.touched.email && formik.errors.email ? (
+       <div className={styles.errorMsg}>{formik.errors.email}</div> 
+     ) : null}
+        </li>
+        <li>
+          <label htmlFor="message">Message</label>
+          <textarea 
+          name="message" 
+          id="message" 
+          value={formik.values.message} 
+          onChange={ e => {
+              if (e.target.value.length <= MAX_MESSAGE_LENGTH + 1)
+              formik.handleChange(e)
+            }}
+          onBlur={formik.handleBlur}/>
+        {formik.touched.message && formik.errors.message ? (
+       <div className={styles.errorMsg}>{formik.errors.message}</div> 
+     ) : null}
+               </li>
+        <li>
+          <button type="submit">Submit</button>
+        </li>
+      </ul>
+    </form>
+}
+{submitDone && <div className="submitDone">
+ <AnimatedTick />
+  </div>}
+  </div>);
+ 
 };
 
 export default Contact;
