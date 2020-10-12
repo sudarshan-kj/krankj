@@ -73,7 +73,7 @@ app.post("/api/contact/submit", function (request, response) {
     if (err) throw err;
     else console.log("Successfully saved user");
   });
-  response.send({ msg: "submitted" });
+  response.send({ msg: "Request submitted" });
   email.send(request.body);
 });
 

@@ -6,7 +6,7 @@ module.exports = {
 const msg = {
   to: 'kjsudi@gmail.com',
   from: 'alerts@krankj.in', // Use the email address or domain you verified above
-  subject: 'New message submitted',
+  subject: 'New message submitted by user: ' + props.name,
   html: `
   <html>
   <head>
@@ -19,7 +19,7 @@ const msg = {
    }
 
    p{
-     margin-right: 10px;
+     width: 50%;
    }
    </style>
    </head>
