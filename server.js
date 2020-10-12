@@ -37,7 +37,7 @@ const postApiLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 60 minutes
   max: 3,
   message: {
-    error: "Too many submissions. Please submit again after an hour.",
+    error: "Too many submissions recorded. Please submit again after an hour.",
   },
 });
 
@@ -73,7 +73,7 @@ app.post("/api/contact/submit", function (request, response) {
     if (err) throw err;
     else console.log("Successfully saved user");
   });
-  response.send({ msg: "Request submitted" });
+  response.send({ msg: "Request submitted successfully" });
   email.send(request.body);
 });
 
