@@ -6,6 +6,8 @@ const port = process.env.PORT || 9000;
 const mongoose = require("mongoose");
 const rateLimit = require("express-rate-limit");
 const email = require("./email");
+const Filter = require("bad-words");
+const filter = new Filter();
 
 let mongoDB = "mongodb://127.0.0.1/test";
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -63,10 +65,13 @@ app.post("/api/world", (req, res) => {
 });
 
 app.post("/api/contact/submit", function (request, response) {
+  let sanitizedFields = {
+    email: filter.clean(request.body.email),
+    name: filter.clean(request.body.name),
+    message: filter.clean(request.body.message),
+  };
   let u = new User({
-    email: request.body.email,
-    name: request.body.name,
-    message: request.body.message,
+    ...sanitizedFields,
   });
 
   u.save(function (err) {
@@ -74,7 +79,7 @@ app.post("/api/contact/submit", function (request, response) {
     else console.log("Successfully saved user");
   });
   response.send({ msg: "Request submitted successfully" });
-  email.send(request.body);
+  email.send(sanitizedFields);
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
