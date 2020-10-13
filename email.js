@@ -1,12 +1,16 @@
 const sgMail = require("@sendgrid/mail");
 
 module.exports = {
-  send: function (props) {
+  send: function (props, isProfane) {
+    let subject = "New message submitted by user: ";
+    if (isProfane) {
+      subject = "Profane message submitted by user: ";
+    }
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
       to: "kjsudi@gmail.com",
       from: "alerts@krankj.in", // Use the email address or domain you verified above
-      subject: "New message submitted by user: " + props.name,
+      subject: subject + props.name,
       html: `
   <html>
   <head>

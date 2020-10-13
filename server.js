@@ -70,6 +70,7 @@ app.post("/api/contact/submit", function (request, response) {
     name: filter.clean(request.body.name),
     message: filter.clean(request.body.message),
   };
+  let isProfane = filter.clean(request.body.message);
   let u = new User({
     ...sanitizedFields,
   });
@@ -79,7 +80,7 @@ app.post("/api/contact/submit", function (request, response) {
     else console.log("Successfully saved user");
   });
   response.send({ msg: "Request submitted successfully" });
-  email.send(sanitizedFields);
+  email.send(sanitizedFields, isProfane);
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
