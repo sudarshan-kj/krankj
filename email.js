@@ -1,13 +1,13 @@
-const sgMail = require('@sendgrid/mail');
+const sgMail = require("@sendgrid/mail");
 
 module.exports = {
-    send: function(props){
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-const msg = {
-  to: 'kjsudi@gmail.com',
-  from: 'alerts@krankj.in', // Use the email address or domain you verified above
-  subject: 'New message submitted by user: ' + props.name,
-  html: `
+  send: function (props) {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: "kjsudi@gmail.com",
+      from: "alerts@krankj.in", // Use the email address or domain you verified above
+      subject: "New message submitted by user: " + props.name,
+      html: `
   <html>
   <head>
   <style>
@@ -32,19 +32,18 @@ const msg = {
   </body>
   </html>
   `,
-};
-//ES8
-(async () => {
-  try {
-    await sgMail.send(msg);
-    console.log(`Email with message: ${props.message} sent successfully`)
-  } catch (error) {
-    console.error(error);
-    if (error.response) {
-      console.error(error.response.body)
-    }
-  }
-})();
-    }
-}
+    };
 
+    (async () => {
+      try {
+        await sgMail.send(msg);
+        console.log(`Email with message: ${props.message} sent successfully`);
+      } catch (error) {
+        console.error(error);
+        if (error.response) {
+          console.error(error.response.body);
+        }
+      }
+    })();
+  },
+};
