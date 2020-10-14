@@ -8,10 +8,6 @@
   animation: slideIn 1s;
 }
 
-.loader {
-  background: red;
-}
-
 .imageLayout {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
@@ -33,20 +29,12 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
-}
-
-.bottomOffsetCover {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 30px;
-  background: var(--background-dark);
+  animation: fadeIn 1s;
 }
 
 @keyframes slideIn {
   from {
-    transform: translate(45px);
+    transform: translate(65px);
     opacity: 0;
   }
   to {

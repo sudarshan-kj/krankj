@@ -7,6 +7,8 @@ import images from "../../../assets/images/gallery";
 import { API_ENDPOINT } from "../../../constants";
 import axios from "axios";
 
+let imageCount = 9;
+
 const override = css`
   position: absolute;
   left: 50%;
@@ -24,16 +26,34 @@ const BottomOffsetCover = styled.div`
 `;
 
 const Gallery = () => {
+  const [serverImages, setServerImages] = React.useState([]);
   const [imageLoading, setImageLoading] = React.useState(true);
   const [serverResponse, setServerResponse] = React.useState("");
 
   const imageLoaded = () => {
-    setImageLoading(false);
+    if (--imageCount === 0) {
+      setImageLoading(false);
+      imageCount = 9;
+    }
+  };
+
+  const fetchDogApi = () => {
+    axios
+      .get("https://api.thedogapi.com/v1/images/search?limit=9")
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error("Api responded with an error");
+        }
+        return response.data;
+      })
+      .then((responseArray) => setServerImages(responseArray))
+      .catch((err) => console.log("Request failed with error", err));
   };
 
   const imgRef = React.useRef();
 
   function callServer() {
+    fetchDogApi();
     axios
       .get(`${API_ENDPOINT}/api/gallery`)
       .then((res) => {
@@ -78,18 +98,20 @@ const Gallery = () => {
   return (
     <div className={styles.container}>
       <div className={styles.imageLayout}>
-        {images.map((image) => {
+        {serverImages.map((image, index) => {
           return (
             <EnhancedImage
-              key={image.default}
-              src={image.default}
+              key={index}
+              src={image.url}
               alt="Image"
               onLoad={imageLoaded}
             />
           );
         })}
       </div>
-      <p>{`Response from server is: ${serverResponse}`}</p>
+      <p
+        style={!imageLoading ? { display: "block" } : { display: "none" }}
+      >{`Response from server is: ${serverResponse}`}</p>
       <BottomOffsetCover />
     </div>
   );
