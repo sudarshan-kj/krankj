@@ -70,7 +70,7 @@ app.post("/api/contact/submit", function (request, response) {
     name: filter.clean(request.body.name),
     message: filter.clean(request.body.message),
   };
-  let isProfane = filter.clean(request.body.message);
+  let isProfane = filter.isProfane(request.body.message);
   let u = new User({
     ...sanitizedFields,
   });
