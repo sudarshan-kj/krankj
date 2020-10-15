@@ -3,23 +3,12 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 9000;
-const mongoose = require("mongoose");
 const rateLimit = require("express-rate-limit");
 const email = require("./email");
 const Filter = require("bad-words");
 const filter = new Filter();
-
-let mongoDB = "mongodb://127.0.0.1/test";
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
-let Schema = mongoose.Schema;
-
-let userSchema = new Schema({
-  email: String,
-  name: String,
-  message: String,
-});
-
-let User = mongoose.model("User", userSchema);
+const AuthorizationRouter = require("./authorization/routes.config");
+const UsersRouter = require("./users/routes.config");
 
 //Get the default connection
 let db = mongoose.connection;
@@ -46,6 +35,10 @@ const postApiLimiter = rateLimit({
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+AuthorizationRouter.routesConfig(app);
+UsersRouter.routesConfig(app);
+
 app.get("/api/*", getApiLimiter);
 app.post("/api/*", postApiLimiter);
 app.get("/api/hello", (req, res) => {
