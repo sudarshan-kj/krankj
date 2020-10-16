@@ -1,20 +1,18 @@
 const mongoose = require("../../common/services/mongoose.service").mongoose;
 
-let Schema = mongoose.Schema;
-
-let userSchema = new Schema({
-  email: String,
-  name: String,
-  message: String,
-});
+let { Schema } = mongoose;
+const opts = { toJSON: { virtuals: true } }; // ensure virtual fields are serialized
+let userSchema = new Schema(
+  {
+    email: String,
+    name: String,
+    message: String,
+  },
+  opts
+);
 
 userSchema.virtual("id").get(function () {
   return this._id.toHexString();
-});
-
-// Ensure virtual fields are serialised.
-userSchema.set("toJSON", {
-  virtuals: true,
 });
 
 userSchema.findById = function (cb) {
