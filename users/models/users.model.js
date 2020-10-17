@@ -1,19 +1,25 @@
 const mongoose = require("../../common/services/mongoose.service").mongoose;
 
 let { Schema } = mongoose;
-const opts = { toJSON: { virtuals: true } }; // ensure virtual fields are serialized
+const opts = {
+  toJSON: {
+    virtuals: true,
+    versionKey: false,
+    transform: function (doc, ret) {
+      delete ret._id;
+    },
+  },
+}; // ensure virtual fields are serialized
 let userSchema = new Schema(
   {
+    firstName: String,
+    lastName: String,
     email: String,
-    name: String,
-    message: String,
+    password: String,
+    permissionLevel: Number,
   },
   opts
 );
-
-userSchema.virtual("id").get(function () {
-  return this._id.toHexString();
-});
 
 userSchema.findById = function (cb) {
   return this.model("Users").find({ id: this.id }, cb);
@@ -27,8 +33,6 @@ exports.findByEmail = (email) => {
 exports.findById = (id) => {
   return User.findById(id).then((result) => {
     result = result.toJSON();
-    delete result._id;
-    delete result.__v;
     return result;
   });
 };

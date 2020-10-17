@@ -21,7 +21,7 @@ const connectWithRetry = () => {
     })
     .catch((err) => {
       console.log(
-        "MongoDB connection unsuccessful, retry after 5 seconds. Rerty attempty:",
+        "MongoDB connection unsuccessful, retry after 5 seconds. Retry attempt: ",
         ++count
       );
       if (count <= 5) {

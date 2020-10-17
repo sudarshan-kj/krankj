@@ -10,12 +10,6 @@ const filter = new Filter();
 const AuthorizationRouter = require("./authorization/routes.config");
 const UsersRouter = require("./users/routes.config");
 
-//Get the default connection
-let db = mongoose.connection;
-
-//Bind connection to error event (to get notification of connection errors)
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
-
 const getApiLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 60 minutes
   max: 500,
