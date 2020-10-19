@@ -79,7 +79,13 @@ exports.patchById = (req, res) => {
 };
 
 exports.removeById = (req, res) => {
-  UserModel.removeById(req.params.userId).then((result) => {
-    res.status(204).send({});
-  });
+  UserModel.removeById(req.params.userId)
+    .then((result) => {
+      res.status(200).send({
+        msg: `User id: ${req.params.userId} has been successfully deleted`,
+      });
+    })
+    .catch((err) =>
+      res.status(500).send({ error: `User ${err.value} could not be deleted` })
+    );
 };
