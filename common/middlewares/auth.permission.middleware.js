@@ -1,4 +1,4 @@
-const ADMIN_PERMISSION = 4096;
+const ADMIN_PERMISSION = require("../config/env.config").permissionLevels.ADMIN;
 
 exports.minimumPermissionLevelRequired = (required_permission_level) => {
   return (req, res, next) => {

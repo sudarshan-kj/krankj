@@ -1,5 +1,5 @@
-const jwtSecret = require("../../common/config/env.config.js").jwt_secret,
-  jwt = require("jsonwebtoken");
+const jwtSecret = require("../../common/config/env.config.js").jwt_secret;
+const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
 exports.login = (req, res) => {
