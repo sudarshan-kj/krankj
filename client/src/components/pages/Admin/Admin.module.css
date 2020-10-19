@@ -1,0 +1,22 @@
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.mainContainer .login {
+}
+
+.mainContainer > h1 {
+  animation: slideIn 1s;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translate(50px);
+    opacity: 0;
+  }
+}

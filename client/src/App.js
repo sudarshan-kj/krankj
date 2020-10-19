@@ -14,6 +14,7 @@ import ScrollToTop from "react-scroll-up";
 import UpArrow from "./assets/icons/left-arrow.svg";
 import styled from "styled-components";
 import Contact from "./components/pages/Contact";
+import Admin from "./components/pages/Admin";
 
 const StyledUpArrow = styled(UpArrow)`
   fill: ${({ theme }) => theme.text};
@@ -56,6 +57,9 @@ const App = () => {
             </Route>
             <Route path="/contact">
               <Contact />
+            </Route>
+            <Route path="/admin">
+              <Admin />
             </Route>
           </Switch>
         </Main>

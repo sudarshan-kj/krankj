@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Header.module.css";
 import ToggleSwitch from "../commons/ToggleSwitch";
+import AdminButton from "../commons/AdminButton";
 import { Link } from "react-router-dom";
 
 const Header = ({ isLightTheme }) => {
@@ -34,6 +35,7 @@ const Header = ({ isLightTheme }) => {
       </nav>
 
       <div className={styles.dummyContainer} />
+      <AdminButton />
       <ToggleSwitch
         isLightTheme={isLightTheme}
         style={{ marginRight: "1rem" }}
