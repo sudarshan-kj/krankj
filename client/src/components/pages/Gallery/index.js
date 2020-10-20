@@ -3,7 +3,6 @@ import styles from "./gallery.module.css";
 import styled from "styled-components";
 import { css } from "@emotion/core";
 import Loader from "react-spinners/PulseLoader";
-import images from "../../../assets/images/gallery";
 import { API_ENDPOINT } from "../../../constants";
 import axios from "axios";
 
@@ -39,12 +38,12 @@ const Gallery = () => {
 
   const fetchDogApi = () => {
     axios
-      .get("https://api.thedogapi.com/v1/images/search?limit=9")
+      .get(`${API_ENDPOINT}/images?limit=11`)
       .then((response) => {
         if (response.status !== 200) {
           throw new Error("Api responded with an error");
         }
-        return response.data;
+        return response.data.images;
       })
       .then((responseArray) => setServerImages(responseArray))
       .catch((err) => console.log("Request failed with error", err));
@@ -102,7 +101,7 @@ const Gallery = () => {
           return (
             <EnhancedImage
               key={index}
-              src={image.url}
+              src={`${API_ENDPOINT}${image.path}`}
               alt="Image"
               onLoad={imageLoaded}
             />
