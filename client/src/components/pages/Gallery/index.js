@@ -36,7 +36,7 @@ const Gallery = () => {
     }
   };
 
-  const fetchDogApi = () => {
+  const fetchImages = () => {
     axios
       .get(`${API_ENDPOINT}/images?limit=11`)
       .then((response) => {
@@ -52,7 +52,7 @@ const Gallery = () => {
   const imgRef = React.useRef();
 
   function callServer() {
-    fetchDogApi();
+    fetchImages();
     axios
       .get(`${API_ENDPOINT}/api/gallery`)
       .then((res) => {
