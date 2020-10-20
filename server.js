@@ -3,12 +3,14 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 9000;
+const path = require("path");
 const rateLimit = require("express-rate-limit");
 const email = require("./email");
 const Filter = require("bad-words");
 const filter = new Filter();
 const AuthorizationRouter = require("./authorization/routes.config");
 const UsersRouter = require("./users/routes.config");
+const GalleryRouter = require("./gallery/routes.config");
 
 const getApiLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 60 minutes
@@ -29,9 +31,10 @@ const postApiLimiter = rateLimit({
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use("/static", express.static(path.join(__dirname, "public")));
 AuthorizationRouter.routesConfig(app);
 UsersRouter.routesConfig(app);
+GalleryRouter.routesConfig(app);
 
 app.get("/api/*", getApiLimiter);
 app.post("/api/*", postApiLimiter);
