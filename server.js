@@ -69,7 +69,7 @@ app.post("/api/contact/submit", function (request, response) {
     if (err) throw err;
     else console.log("Successfully saved user");
   });
-  response.send({ msg: "Request submitted successfully" });
+  response.send({ msg: "Message submitted" });
   email.send(sanitizedFields, isProfane);
 });
 
