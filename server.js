@@ -12,6 +12,8 @@ const AuthorizationRouter = require("./authorization/routes.config");
 const UsersRouter = require("./users/routes.config");
 const GalleryRouter = require("./gallery/routes.config");
 
+let sessionOptions = { secret: "keyboard cat", cookie: {} };
+
 const getApiLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 60 minutes
   max: 500,
