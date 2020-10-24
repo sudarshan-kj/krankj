@@ -5,10 +5,12 @@ const app = express();
 const port = process.env.PORT || 9000;
 const path = require("path");
 const rateLimit = require("express-rate-limit");
-const email = require("./email");
-const Filter = require("bad-words");
-const filter = new Filter();
-const { AuthorizationRoutes, UsersRoutes, GalleryRoutes } = require("./routes");
+const {
+  AuthorizationRoutes,
+  UsersRoutes,
+  GalleryRoutes,
+  ContactRoutes,
+} = require("./routes");
 
 let sessionOptions = { secret: "keyboard cat", cookie: {} };
 
@@ -40,40 +42,6 @@ app.use("/api", apiRouter);
 apiRouter.use("/auth", AuthorizationRoutes);
 apiRouter.use("/users", UsersRoutes);
 apiRouter.use("/gallery", GalleryRoutes);
-
-app.get("/api/hello", (req, res) => {
-  res.send({ express: "Hello From Express" });
-});
-
-app.get("/api/gallery", (req, res) => {
-  res.send({ key: "Srinivas and Sudarshan" });
-});
-
-let msg = {
-  key: "value",
-};
-
-app.post("/api/world", (req, res) => {
-  res.send(msg);
-});
-
-app.post("/api/contact/submit", function (request, response) {
-  let sanitizedFields = {
-    email: filter.clean(request.body.email),
-    name: filter.clean(request.body.name),
-    message: filter.clean(request.body.message),
-  };
-  let isProfane = filter.isProfane(request.body.message);
-  let u = new User({
-    ...sanitizedFields,
-  });
-
-  u.save(function (err) {
-    if (err) throw err;
-    else console.log("Successfully saved user");
-  });
-  response.send({ msg: "Message submitted" });
-  email.send(sanitizedFields, isProfane);
-});
+apiRouter.use("/contact", ContactRoutes);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
