@@ -8,9 +8,7 @@ const rateLimit = require("express-rate-limit");
 const email = require("./email");
 const Filter = require("bad-words");
 const filter = new Filter();
-const AuthorizationRouter = require("./authorization/routes.config");
-const UsersRouter = require("./users/routes.config");
-const GalleryRouter = require("./gallery/routes.config");
+const { AuthorizationRoutes, UsersRoutes, GalleryRoutes } = require("./routes");
 
 let sessionOptions = { secret: "keyboard cat", cookie: {} };
 
@@ -34,12 +32,15 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/static", express.static(path.join(__dirname, "public")));
-AuthorizationRouter.routesConfig(app);
-UsersRouter.routesConfig(app);
-GalleryRouter.routesConfig(app);
-
 app.get("/api/*", getApiLimiter);
 app.post("/api/*", postApiLimiter);
+
+const apiRouter = express.Router();
+app.use("/api", apiRouter);
+apiRouter.use("/auth", AuthorizationRoutes);
+apiRouter.use("/users", UsersRoutes);
+apiRouter.use("/gallery", GalleryRoutes);
+
 app.get("/api/hello", (req, res) => {
   res.send({ express: "Hello From Express" });
 });
