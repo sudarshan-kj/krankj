@@ -38,7 +38,7 @@ const Gallery = () => {
 
   const fetchImages = () => {
     axios
-      .get(`${API_ENDPOINT}/images?limit=11`)
+      .get(`${API_ENDPOINT}/api/images?limit=11`)
       .then((response) => {
         if (response.status !== 200) {
           throw new Error("Api responded with an error");
@@ -51,18 +51,8 @@ const Gallery = () => {
 
   const imgRef = React.useRef();
 
-  function callServer() {
-    fetchImages();
-    axios
-      .get(`${API_ENDPOINT}/api/gallery`)
-      .then((res) => {
-        setServerResponse(res.data.key);
-      })
-      .catch((err) => setServerResponse("<Error loading data>"));
-  }
-
   React.useEffect(() => {
-    callServer();
+    fetchImages();
   }, []);
 
   React.useEffect(() => {
@@ -108,9 +98,6 @@ const Gallery = () => {
           );
         })}
       </div>
-      <p
-        style={!imageLoading ? { display: "block" } : { display: "none" }}
-      >{`Response from server is: ${serverResponse}`}</p>
       <BottomOffsetCover />
     </div>
   );

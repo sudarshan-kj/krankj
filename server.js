@@ -41,7 +41,7 @@ const apiRouter = express.Router();
 app.use("/api", apiRouter);
 apiRouter.use("/auth", AuthorizationRoutes);
 apiRouter.use("/users", UsersRoutes);
-apiRouter.use("/gallery", GalleryRoutes);
+apiRouter.use("/images", GalleryRoutes);
 apiRouter.use("/contact", ContactRoutes);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
