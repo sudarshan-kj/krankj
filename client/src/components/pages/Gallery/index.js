@@ -5,11 +5,7 @@ import { css } from "@emotion/core";
 import Loader from "react-spinners/PulseLoader";
 import { API_ENDPOINT } from "../../../constants";
 import axios from "axios";
-const log4js = require("log4js");
-const logger = log4js.getLogger();
-logger.level = "debug";
-
-let imageCount = 9;
+let imageCount = 11;
 
 const override = css`
   position: absolute;
@@ -27,36 +23,71 @@ const BottomOffsetCover = styled.div`
   background: ${({ theme }) => theme.body};
 `;
 
+const galleryReducer = (state, action) => {
+  switch (action.type) {
+    case "FETCH_INIT":
+      return { ...state, isLoading: true, isError: false };
+    case "FETCH_DATA_SUCCESS":
+      return {
+        ...state,
+        serverImages: action.payload,
+      };
+    case "FETCH_COMPLETE":
+      return { ...state, isLoading: false, isError: false };
+    case "FETCH_FAIL":
+      return { ...state, isError: true, isLoading: false };
+    default:
+      throw new Error("Unkown action received by gallery reducer");
+  }
+};
+
 const Gallery = () => {
   const [serverImages, setServerImages] = React.useState([]);
-  const [imageLoading, setImageLoading] = React.useState(true);
-  const [serverResponse, setServerResponse] = React.useState("");
+  const [url, setUrl] = React.useState(`${API_ENDPOINT}/api/images?limit=11`);
+  const [images, dispatchImages] = React.useReducer(galleryReducer, {
+    serverImages: [],
+    isError: false,
+    isLoading: false,
+  });
 
   const imageLoaded = () => {
     if (--imageCount === 0) {
-      setImageLoading(false);
-      imageCount = 9;
+      //dispatch({ type: "FETCH_COMPLETE" });
+      imageCount = 11;
     }
   };
 
   const fetchImages = () => {
-    axios
-      .get(`${API_ENDPOINT}/api/images?limit=11`)
-      .then((response) => {
-        if (response.status !== 200) {
-          throw new Error("Api responded with an error");
-        }
-        return response.data.images;
-      })
-      .then((responseArray) => setServerImages(responseArray))
-      .catch((err) => logger.error("Request failed with error", err));
+    dispatchImages({ type: "FETCH_INIT" });
+    setTimeout(
+      () =>
+        axios
+          .get(url)
+          .then((response) => {
+            if (response.status !== 200) {
+              throw new Error("Api responded with an error");
+            }
+            return response.data.images;
+          })
+          .then((responseArray) =>
+            dispatchImages({
+              type: "FETCH_DATA_SUCCESS",
+              payload: responseArray,
+            })
+          )
+          .catch((err) => {
+            console.log("Request failed with error", err);
+            dispatchImages({ type: "FETCH_FAIL" });
+          }),
+      2000
+    );
   };
 
   const imgRef = React.useRef();
 
   React.useEffect(() => {
     fetchImages();
-  }, []);
+  }, [url]);
 
   React.useEffect(() => {
     const handleContextMenu = (event) => {
@@ -76,11 +107,11 @@ const Gallery = () => {
           className={styles.loader}
           css={override}
           color={"#a1a1a1"}
-          loading={imageLoading}
+          loading={images.isLoading}
         />
         <img
           ref={imgRef}
-          style={imageLoading ? { display: "none" } : { display: "inline" }}
+          style={images.isLoading ? { display: "none" } : { display: "inline" }}
           {...props}
         />
       </div>
@@ -90,7 +121,7 @@ const Gallery = () => {
   return (
     <div className={styles.container}>
       <div className={styles.imageLayout}>
-        {serverImages.map((image, index) => {
+        {images.serverImages.map((image, index) => {
           return (
             <EnhancedImage
               key={index}
@@ -102,6 +133,7 @@ const Gallery = () => {
         })}
       </div>
       <BottomOffsetCover />
+      {images.isError && <p>Something went wrong..</p>}
     </div>
   );
 };
