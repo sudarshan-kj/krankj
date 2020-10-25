@@ -20,7 +20,7 @@ let contactedUserSchema = new Schema(
   opts
 );
 
-let ContactedUser = mongoose.model("ContactedUsers", contactedUserSchema);
+let ContactedUser = mongoose.model("contacteduser", contactedUserSchema);
 
 exports.saveContactedUser = (userData) => {
   const contactedUser = new ContactedUser(userData);
