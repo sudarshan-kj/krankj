@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
+const log4js = require("log4js");
+const logger = log4js.getLogger();
+logger.level = "debug";
 let count = 0;
-
 let mongoDBUrl = "mongodb://127.0.0.1/test";
 
 const options = {
@@ -13,14 +15,14 @@ const options = {
   useUnifiedTopology: true,
 };
 const connectWithRetry = () => {
-  console.log("MongoDB connection with retry");
+  logger.debug("Setting up MongoDB connection with retry");
   mongoose
     .connect(mongoDBUrl, options)
     .then(() => {
-      console.log("MongoDB is connected");
+      logger.info("MongoDB is connected");
     })
     .catch((err) => {
-      console.log(
+      logger.error(
         "MongoDB connection unsuccessful, retry after 5 seconds. Retry attempt: ",
         ++count
       );

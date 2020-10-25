@@ -1,4 +1,7 @@
 const sgMail = require("@sendgrid/mail");
+const log4js = require("log4js");
+const logger = log4js.getLogger();
+logger.level = "debug";
 
 module.exports = {
   send: function (props, isProfane) {
@@ -41,11 +44,11 @@ module.exports = {
     (async () => {
       try {
         await sgMail.send(msg);
-        console.log(`Email with message: ${props.message} sent successfully`);
+        logger.info(`Email with message: ${props.message} sent successfully`);
       } catch (error) {
-        console.error(error);
+        logger.error(error);
         if (error.response) {
-          console.error(error.response.body);
+          logger.error(error.response.body);
         }
       }
     })();

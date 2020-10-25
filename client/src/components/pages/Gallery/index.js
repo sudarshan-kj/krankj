@@ -5,6 +5,9 @@ import { css } from "@emotion/core";
 import Loader from "react-spinners/PulseLoader";
 import { API_ENDPOINT } from "../../../constants";
 import axios from "axios";
+const log4js = require("log4js");
+const logger = log4js.getLogger();
+logger.level = "debug";
 
 let imageCount = 9;
 
@@ -46,7 +49,7 @@ const Gallery = () => {
         return response.data.images;
       })
       .then((responseArray) => setServerImages(responseArray))
-      .catch((err) => console.log("Request failed with error", err));
+      .catch((err) => logger.error("Request failed with error", err));
   };
 
   const imgRef = React.useRef();

@@ -1,5 +1,8 @@
 const fs = require("fs").promises;
 const path = require("path");
+const log4js = require("log4js");
+const logger = log4js.getLogger();
+logger.level = "debug";
 
 const Image = (function () {
   return function (path, id) {
@@ -31,6 +34,6 @@ exports.list = (req, res) => {
       res
         .status(500)
         .send({ error: "Error occurred while reading the images" });
-      console.log("Error :", err);
+      logger.error("Error :", err);
     });
 };

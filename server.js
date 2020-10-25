@@ -1,10 +1,13 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 9000;
 const path = require("path");
 const rateLimit = require("express-rate-limit");
+const log4js = require("log4js");
+const logger = log4js.getLogger();
+logger.level = "debug";
+
 const {
   AuthorizationRoutes,
   UsersRoutes,
@@ -31,12 +34,13 @@ const postApiLimiter = rateLimit({
 });
 
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.disable("x-powered-by");
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use("/static", express.static(path.join(__dirname, "public")));
 app.get("/api/*", getApiLimiter);
 app.post("/api/*", postApiLimiter);
-
+logger.debug("Setting up routes");
 const apiRouter = express.Router();
 app.use("/api", apiRouter);
 apiRouter.use("/auth", AuthorizationRoutes);
@@ -44,4 +48,4 @@ apiRouter.use("/users", UsersRoutes);
 apiRouter.use("/images", GalleryRoutes);
 apiRouter.use("/contact", ContactRoutes);
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => logger.debug(`Listening on port ${port}`));

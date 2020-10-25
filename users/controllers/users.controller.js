@@ -18,7 +18,6 @@ const setPermissionOnUser = (email) => {
       break;
     }
   }
-  console.log("Value is", permissionValue);
   return permissionValue;
 };
 

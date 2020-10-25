@@ -2,6 +2,9 @@ const Filter = require("bad-words");
 const filter = new Filter();
 const email = require("../../utils/email");
 const ContactedUserModel = require("../model/contacteduser.model");
+const log4js = require("log4js");
+const logger = log4js.getLogger();
+logger.level = "debug";
 
 exports.saveUser = (req, res) => {
   let sanitizedFields = {
@@ -18,6 +21,6 @@ exports.saveUser = (req, res) => {
     })
     .catch((err) => {
       res.status(400).send({ error: "Message not submitted" });
-      console.log("Error occurred while saving user data", err);
+      logger.error("Error occurred while saving user data", err);
     });
 };
