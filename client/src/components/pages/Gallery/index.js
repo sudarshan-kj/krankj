@@ -31,6 +31,8 @@ const galleryReducer = (state, action) => {
       return {
         ...state,
         serverImages: action.payload,
+        isError: false,
+        isLoading: false,
       };
     case "FETCH_COMPLETE":
       return { ...state, isLoading: false, isError: false };
@@ -42,52 +44,46 @@ const galleryReducer = (state, action) => {
 };
 
 const Gallery = () => {
-  const [serverImages, setServerImages] = React.useState([]);
-  const [url, setUrl] = React.useState(`${API_ENDPOINT}/api/images?limit=11`);
+  const [queryParams, setQueryParams] = React.useState({
+    page: 0,
+    limit: 11,
+  });
+  const [url, setUrl] = React.useState(
+    `${API_ENDPOINT}/api/images?limit=${queryParams.limit}&page=${queryParams.page}`
+  );
   const [images, dispatchImages] = React.useReducer(galleryReducer, {
     serverImages: [],
     isError: false,
     isLoading: false,
   });
 
-  const imageLoaded = () => {
-    if (--imageCount === 0) {
-      //dispatch({ type: "FETCH_COMPLETE" });
-      imageCount = 11;
-    }
-  };
-
-  const fetchImages = () => {
+  const fetchImages = React.useCallback(() => {
     dispatchImages({ type: "FETCH_INIT" });
-    setTimeout(
-      () =>
-        axios
-          .get(url)
-          .then((response) => {
-            if (response.status !== 200) {
-              throw new Error("Api responded with an error");
-            }
-            return response.data.images;
-          })
-          .then((responseArray) =>
-            dispatchImages({
-              type: "FETCH_DATA_SUCCESS",
-              payload: responseArray,
-            })
-          )
-          .catch((err) => {
-            console.log("Request failed with error", err);
-            dispatchImages({ type: "FETCH_FAIL" });
-          }),
-      2000
-    );
-  };
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error("Api responded with an error");
+        }
+        return response.data.images;
+      })
+      .then((responseArray) =>
+        dispatchImages({
+          type: "FETCH_DATA_SUCCESS",
+          payload: responseArray,
+        })
+      )
+      .catch((err) => {
+        console.log("Request failed with error", err);
+        dispatchImages({ type: "FETCH_FAIL" });
+      });
+  }, [queryParams]);
 
   const imgRef = React.useRef();
 
   React.useEffect(() => {
     fetchImages();
-  }, [url]);
+  }, [fetchImages]);
 
   React.useEffect(() => {
     const handleContextMenu = (event) => {
@@ -118,16 +114,34 @@ const Gallery = () => {
     );
   };
 
+  //There are two types of loading, for which the loader is shown.
+  //1: When the server is responding slowly.
+  //2: After, fetching images from the server, the html <img> attribute has to load the image
+
   return (
     <div className={styles.container}>
       <div className={styles.imageLayout}>
+        {images.isLoading &&
+          Array(queryParams.limit)
+            .fill()
+            .map((value, index) => {
+              return (
+                <div key={index} className={styles.imageContainer}>
+                  <Loader
+                    className={styles.loader}
+                    css={override}
+                    color={"#a1a1a1"}
+                    loading={images.isLoading}
+                  />
+                </div>
+              );
+            })}
         {images.serverImages.map((image, index) => {
           return (
             <EnhancedImage
               key={index}
               src={`${API_ENDPOINT}${image.path}`}
               alt="Image"
-              onLoad={imageLoaded}
             />
           );
         })}
