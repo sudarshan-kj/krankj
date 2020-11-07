@@ -20,8 +20,7 @@
     "log4js": "^6.3.0",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.8",
-    "uuid": "^8.3.1",
-    "yup": "^0.29.3"
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "concurrently": "^4.0.1"
