@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import UserIcon from "../../assets/icons/user.svg";
+import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 import { Link } from "react-router-dom";
 
 const StyledAdminButton = styled(UserIcon)`

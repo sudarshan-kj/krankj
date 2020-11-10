@@ -11,7 +11,7 @@ module.exports = {
     }
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
-      to: "contact@krankj.in",
+      to: "kjsudi@gmail.com",
       from: "alerts@krankj.in", // Use the email address or domain you verified above
       subject: subject + props.name,
       html: `

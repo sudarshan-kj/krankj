@@ -11,7 +11,7 @@ import About from "./components/pages/About";
 import Footer from "./components/Footer";
 import usePersistence from "./hooks/usePersistence";
 import ScrollToTop from "react-scroll-up";
-import UpArrow from "./assets/icons/left-arrow.svg";
+import { ReactComponent as UpArrow } from "./assets/icons/left-arrow.svg";
 import styled from "styled-components";
 import Contact from "./components/pages/Contact";
 import Admin from "./components/pages/Admin";
@@ -43,24 +43,16 @@ const App = () => {
         <Header isLightTheme={isLightTheme} />
         <Main>
           <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/home">
-              <Home />
-            </Route>
-            <Route path="/gallery">
-              <Gallery />
-            </Route>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/contact">
-              <Contact />
-            </Route>
-            <Route path="/admin">
-              <Admin />
-            </Route>
+            <Route exact path="/" component={Home} />
+
+            <Route path="/home" component={Home} />
+
+            <Route path="/gallery" component={Gallery} />
+
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
+
+            <Route path="/admin" component={Admin} />
           </Switch>
         </Main>
         <ScrollToTop showUnder={160}>

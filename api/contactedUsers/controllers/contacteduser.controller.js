@@ -13,8 +13,8 @@ const schema = Joi.object({
       minDomainSegments: 2,
     })
     .required(),
-  name: Joi.string().alphanum().min(2).max(30).required(),
-  message: Joi.string().min(10).max(300).required(),
+  name: Joi.string().min(2).max(30).required(),
+  message: Joi.string().min(1).max(300).required(),
 });
 
 exports.saveUser = (req, res) => {

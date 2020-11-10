@@ -8,7 +8,7 @@ const ToggleSwitch = ({ isLightTheme, style }) => {
 
   React.useEffect(() => {
     isLightTheme(checked);
-  }, [checked]);
+  }, [checked, isLightTheme]);
 
   const toggleCheckedSwitch = () => {
     setChecked((prev) => !prev);

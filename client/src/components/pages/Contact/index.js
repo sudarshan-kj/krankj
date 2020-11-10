@@ -65,11 +65,19 @@ const Contact = () => {
           dispatchSubmit({ type: "SUBMIT_SUCCESS", payload: res.data.msg });
         })
         .catch((err) => {
-          if (err.response.status === 429) {
-            dispatchSubmit({
-              type: "SUBMIT_TOO_MANY_REQUESTS",
-              payload: err.response.data.error,
-            });
+          if (err.response) {
+            if (err.response.status === 429) {
+              dispatchSubmit({
+                type: "SUBMIT_TOO_MANY_REQUESTS",
+                payload: err.response.data.error,
+              });
+            } else {
+              dispatchSubmit({
+                type: "SUBMIT_ERROR",
+                payload:
+                  "Something went wrong. Your response was not submitted",
+              });
+            }
           } else {
             dispatchSubmit({
               type: "SUBMIT_ERROR",
