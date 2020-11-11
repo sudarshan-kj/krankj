@@ -41,16 +41,20 @@ module.exports = {
   `,
     };
 
-    (async () => {
+    const sendEmailPromise = new Promise(async function (resolve, reject) {
       try {
         await sgMail.send(msg);
+        resolve("Email sent successfully");
         logger.info(`Email with message: ${props.message} sent successfully`);
       } catch (error) {
         logger.error(error);
         if (error.response) {
           logger.error(error.response.body);
         }
+        reject(error);
       }
-    })();
+    });
+
+    return sendEmailPromise;
   },
 };

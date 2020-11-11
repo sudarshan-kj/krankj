@@ -30,11 +30,13 @@ exports.saveUser = (req, res) => {
   }
   ContactedUserModel.saveContactedUser(sanitizedFields)
     .then(() => {
+      return email.send(sanitizedFields, isProfane);
+    })
+    .then(() => {
       res.send({ msg: "Message submitted" });
-      email.send(sanitizedFields, isProfane);
     })
     .catch((err) => {
-      res.status(400).send({ error: "Message not submitted" });
+      res.status(400).send({ error: "Message not submitted", msg: err });
       logger.error("Error occurred while saving user data", err);
     });
 };
