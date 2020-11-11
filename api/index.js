@@ -18,7 +18,7 @@ const {
 let sessionOptions = { secret: "keyboard cat", cookie: {} };
 
 const getApiLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000, // 60 minutes
+  windowMs: 30 * 60 * 1000, // 60 minutes
   max: 500,
   message: {
     error: "Too many requests. Please try again later",
@@ -26,8 +26,8 @@ const getApiLimiter = rateLimit({
 });
 
 const postApiLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000, // 60 minutes
-  max: 3,
+  windowMs: 30 * 60 * 1000, // 60 minutes
+  max: 25,
   message: {
     error: "Too many submissions recorded. Please submit again after an hour.",
   },
