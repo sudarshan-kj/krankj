@@ -31,10 +31,8 @@ exports.saveUser = (req, res) => {
   email
     .send(sanitizedFields, isProfane)
     .then(() => {
+      ContactedUserModel.saveContactedUser(sanitizedFields);
       res.send({ msg: "Message submitted" });
-    })
-    .then(() => {
-      return ContactedUserModel.saveContactedUser(sanitizedFields);
     })
     .catch((err) => {
       res.status(400).send({ error: "Message not submitted", msg: err });
