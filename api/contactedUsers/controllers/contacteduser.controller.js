@@ -28,12 +28,13 @@ exports.saveUser = (req, res) => {
   if (error) {
     return res.status(400).send({ error: error.details });
   }
-  ContactedUserModel.saveContactedUser(sanitizedFields)
-    .then(() => {
-      return email.send(sanitizedFields, isProfane);
-    })
+  email
+    .send(sanitizedFields, isProfane)
     .then(() => {
       res.send({ msg: "Message submitted" });
+    })
+    .then(() => {
+      return ContactedUserModel.saveContactedUser(sanitizedFields);
     })
     .catch((err) => {
       res.status(400).send({ error: "Message not submitted", msg: err });

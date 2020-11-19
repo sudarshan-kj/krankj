@@ -58,38 +58,35 @@ const Contact = () => {
   });
   const postData = (values) => {
     dispatchSubmit({ type: "SUBMIT_PENDING", payload: "Submitting.." });
-    setTimeout(() => {
-      axios
-        .post(`${API_ENDPOINT}/api/contact/submit`, values)
-        .then((res) => {
-          dispatchSubmit({ type: "SUBMIT_SUCCESS", payload: res.data.msg });
-        })
-        .catch((err) => {
-          if (err.response) {
-            if (err.response.status === 429) {
-              dispatchSubmit({
-                type: "SUBMIT_TOO_MANY_REQUESTS",
-                payload: err.response.data.error,
-              });
-            } else {
-              dispatchSubmit({
-                type: "SUBMIT_ERROR",
-                payload:
-                  "Something went wrong. Your response was not submitted",
-              });
-            }
+    axios
+      .post(`${API_ENDPOINT}/api/contact/submit`, values)
+      .then((res) => {
+        dispatchSubmit({ type: "SUBMIT_SUCCESS", payload: res.data.msg });
+      })
+      .catch((err) => {
+        if (err.response) {
+          if (err.response.status === 429) {
+            dispatchSubmit({
+              type: "SUBMIT_TOO_MANY_REQUESTS",
+              payload: err.response.data.error,
+            });
           } else {
             dispatchSubmit({
               type: "SUBMIT_ERROR",
               payload: "Something went wrong. Your response was not submitted",
             });
           }
-          console.log(
-            "Error occurred while submitting the form data",
-            err.response
-          );
-        });
-    }, 300);
+        } else {
+          dispatchSubmit({
+            type: "SUBMIT_ERROR",
+            payload: "Something went wrong. Your response was not submitted",
+          });
+        }
+        console.log(
+          "Error occurred while submitting the form data",
+          err.response
+        );
+      });
   };
 
   const formik = useFormik({
