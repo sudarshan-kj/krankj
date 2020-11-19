@@ -31,7 +31,9 @@ exports.saveUser = (req, res) => {
   email
     .send(sanitizedFields, isProfane)
     .then(() => {
-      ContactedUserModel.saveContactedUser(sanitizedFields);
+      return ContactedUserModel.saveContactedUser(sanitizedFields);
+    })
+    .then(() => {
       res.send({ msg: "Message submitted" });
     })
     .catch((err) => {
