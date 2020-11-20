@@ -53,8 +53,8 @@ const yupValidationObject = Yup.object({
 const Contact = () => {
   const [submit, dispatchSubmit] = React.useReducer(submitReducer, {
     message: "",
-    submitSuccess: false,
-    submitFailure: false,
+    success: false,
+    failure: false,
   });
   const postData = (values) => {
     dispatchSubmit({ type: "SUBMIT_PENDING", payload: "Submitting.." });
