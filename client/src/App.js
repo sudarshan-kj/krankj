@@ -52,7 +52,7 @@ const App = () => {
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
 
-            <Route path="/admin" component={Admin} />
+            <Route path="/adminLogin" component={Admin} />
           </Switch>
         </Main>
         <ScrollToTop showUnder={160}>
