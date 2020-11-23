@@ -1,7 +1,10 @@
 import React from "react";
 import styles from "./AdminForm.module.css";
+import axios from "axios";
+import { API_ENDPOINT } from "../../../constants";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useHistory } from "react-router-dom";
 
 const MAX_EMAIL_LENGTH = 30;
 const MIN_EMAIL_LENGTH = 3;
@@ -18,7 +21,23 @@ const yupValidationObject = Yup.object({
     .max(MAX_PWD_LENGTH, "Too long")
     .required("Enter password"),
 });
-const AdminForm = ({ handleLogin }) => {
+const AdminForm = () => {
+  const [error, setError] = React.useState("");
+  const history = useHistory();
+  const handleLogin = (values) => {
+    axios
+      .post(`${API_ENDPOINT}/api/auth`, values)
+      .then((res) => {
+        if (res.data.accessToken) {
+          localStorage.setItem("token", res.data.accessToken);
+          history.push("/usersList");
+        }
+      })
+      .catch((err) => {
+        setError("Invalid user/password");
+      });
+  };
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -42,8 +61,10 @@ const AdminForm = ({ handleLogin }) => {
               name="email"
               type="text"
               onChange={(e) => {
-                if (e.target.value.length <= MAX_EMAIL_LENGTH + 1)
+                if (e.target.value.length <= MAX_EMAIL_LENGTH + 1) {
+                  setError("");
                   formik.handleChange(e);
+                }
               }}
               onBlur={formik.handleBlur}
               value={formik.values.email}
@@ -72,6 +93,7 @@ const AdminForm = ({ handleLogin }) => {
           <li>
             <button type="submit">Login</button>
           </li>
+          <li className={styles.errorMsg}>{error}</li>
         </ul>
       </form>
     </div>

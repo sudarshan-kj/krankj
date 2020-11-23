@@ -1,21 +1,11 @@
 import React from "react";
 import axios from "axios";
-import { API_ENDPOINT } from "../../../constants";
-import AdminForm from "./Form";
-
-const login = (values) => {
-  axios
-    .post(`${API_ENDPOINT}/api/auth`, values)
-    .then((res) => console.log("Response is", res))
-    .catch((err) => console.log("Error occured while logging the user in"));
-};
+import AdminForm from "./AdminForm";
+import { isAuthenticated } from "../../commons/Auth";
+import UsersList from "./UsersList";
 
 const Admin = () => {
-  return (
-    <>
-      <AdminForm handleLogin={login} />
-    </>
-  );
+  return <>{isAuthenticated() ? <UsersList /> : <AdminForm />}</>;
 };
 
 export default Admin;
