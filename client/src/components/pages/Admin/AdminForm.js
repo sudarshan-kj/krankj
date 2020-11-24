@@ -22,8 +22,9 @@ const yupValidationObject = Yup.object({
     .required("Enter password"),
 });
 const AdminForm = () => {
-  const [error, setError] = React.useState("");
+  const [loginError, setLoginError] = React.useState("");
   const history = useHistory();
+
   const handleLogin = (values) => {
     axios
       .post(`${API_ENDPOINT}/api/auth`, values)
@@ -31,10 +32,12 @@ const AdminForm = () => {
         if (res.data.accessToken) {
           localStorage.setItem("token", res.data.accessToken);
           history.push("/usersList");
+        } else {
+          throw new Error("Missing access token");
         }
       })
       .catch((err) => {
-        setError("Invalid user/password");
+        setLoginError("Invalid user/password");
       });
   };
 
@@ -62,7 +65,7 @@ const AdminForm = () => {
               type="text"
               onChange={(e) => {
                 if (e.target.value.length <= MAX_EMAIL_LENGTH + 1) {
-                  setError("");
+                  setLoginError("");
                   formik.handleChange(e);
                 }
               }}
@@ -93,7 +96,7 @@ const AdminForm = () => {
           <li>
             <button type="submit">Login</button>
           </li>
-          <li className={styles.errorMsg}>{error}</li>
+          <li className={styles.errorMsg}>{loginError}</li>
         </ul>
       </form>
     </div>

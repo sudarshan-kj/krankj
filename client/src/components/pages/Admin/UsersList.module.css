@@ -9,27 +9,6 @@
   right: 0;
 }
 
-.logoutButton {
-  width: 90%;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.logoutButton button {
-  background-color: #db6505;
-  border: none;
-  color: white;
-  padding: 0.5rem;
-  text-decoration: none;
-  font-size: 1rem;
-  margin: 10px 0;
-}
-
-.logoutButton button:hover {
-  cursor: pointer;
-  background-color: #a8530e;
-}
-
 table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;

@@ -1,11 +1,10 @@
 import React from "react";
-import axios from "axios";
 import AdminForm from "./AdminForm";
-import { isAuthenticated } from "../../commons/Auth";
+import { isAuthenticated } from "../../../utils/Auth";
 import UsersList from "./UsersList";
 
 const Admin = () => {
-  return <>{isAuthenticated() ? <UsersList /> : <AdminForm />}</>;
+  return <>{!isAuthenticated() ? <AdminForm /> : <UsersList />}</>;
 };
 
 export default Admin;

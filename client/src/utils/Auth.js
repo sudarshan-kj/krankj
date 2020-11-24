@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_ENDPOINT } from "../../constants";
+import { API_ENDPOINT } from "../constants";
 
 export const isAuthenticated = () => {
   if (
@@ -17,11 +17,12 @@ export const login = (values) => {
     .then((res) => {
       if (res.data.accessToken) {
         localStorage.setItem("token", res.data.accessToken);
+      } else {
+        throw new Error("Authentication failed");
       }
     })
     .catch((err) => {
-      console.err("Authentication failed");
-      return 100;
+      console.err(err);
     });
 };
 

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 import { Link } from "react-router-dom";
-import { isAuthenticated } from "../commons/Auth";
 
 const StyledAdminButton = styled(UserIcon)`
   fill: ${({ theme }) => theme.text};

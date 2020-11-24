@@ -3,7 +3,8 @@ import axios from "axios";
 import { API_ENDPOINT } from "../../../constants";
 import { useHistory } from "react-router-dom";
 import styles from "./UsersList.module.css";
-import { logout } from "../../commons/Auth";
+import { logout } from "../../../utils/Auth";
+import Logout from "../../commons/Logout";
 
 const UsersList = () => {
   const [users, setUsers] = React.useState([]);
@@ -28,20 +29,19 @@ const UsersList = () => {
   const getUsers = async () => {
     try {
       const result = await authAxios.get("/api/users");
-      if (result.status !== 200) {
-        history.push("/adminLogin");
+      if (Math.floor(result.status / 100) === 2) {
+        setUsers(result.data);
+      } else {
+        handleLogout();
       }
-      setUsers(result.data);
     } catch (err) {
-      history.push("/adminLogin");
-      console.log("No valid token found");
+      handleLogout();
+      console.error("Invalid token");
     }
   };
   return (
     <div className={styles.mainContainer}>
-      <div className={styles.logoutButton}>
-        <button onClick={handleLogout}>Logout</button>
-      </div>
+      <Logout />
       <table>
         <thead>
           <tr>
