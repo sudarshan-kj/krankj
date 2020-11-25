@@ -12,6 +12,7 @@ exports.verifyRefreshBodyField = (req, res, next) => {
 
 exports.validRefreshNeeded = (req, res, next) => {
   let b = Buffer.from(req.body.refresh_token, "base64");
+  //get the stored refresh key from database. If you get the key, it's valid, else client has to re-login.
   let refresh_token = b.toString();
   let hash = crypto
     .createHmac("sha512", req.jwt.refreshKey)

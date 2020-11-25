@@ -11,7 +11,6 @@ authRouter.post("", [
 ]);
 
 authRouter.post("/refresh", [
-  AuthValidationMiddleware.validJWTNeeded,
   AuthValidationMiddleware.verifyRefreshBodyField,
   AuthValidationMiddleware.validRefreshNeeded,
   AuthorizationController.login,
