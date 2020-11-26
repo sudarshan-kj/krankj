@@ -1,12 +1,16 @@
 const mongoose = require("../../common/services/mongoose.service").mongoose;
 
 let { Schema } = mongoose;
+
 const opts = {
   toJSON: {
     virtuals: true,
     versionKey: false,
     transform: function (doc, ret) {
       delete ret._id;
+      delete ret.password;
+      delete ret.permissionLevel;
+      delete ret.revokeAccess;
     },
   },
 }; // ensure virtual fields are serialized
