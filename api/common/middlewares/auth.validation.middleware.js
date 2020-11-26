@@ -12,7 +12,9 @@ exports.verifyRefreshBodyField = (req, res, next) => {
   }
 };
 
-//check if the refresh token is valid. Also check if user access has been revoked
+/*Check if the refresh token is valid. Also check if user access has been revoked. This way we can revoke user access while
+issuing new tokens. This prevents the overhead of calling the db on every api call on restricted access routes, if user access has been revoked.*/
+
 exports.validRefreshNeeded = (req, res, next) => {
   try {
     let { userId } = jwt.verify(req.body.refreshToken, rtSecret);
@@ -31,7 +33,7 @@ exports.validRefreshNeeded = (req, res, next) => {
             permissionLevel: user.permissionLevel,
             provider: "email",
             name: user.firstName + " " + user.lastName,
-            refreshedAt: Math.floor(new Date().getTime() / 1000),
+            refreshed: true,
           };
           return next();
         }
