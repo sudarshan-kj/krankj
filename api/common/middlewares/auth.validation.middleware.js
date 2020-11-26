@@ -1,27 +1,43 @@
 const jwt = require("jsonwebtoken"),
-  secret = require("../config/env.config.js").jwt_secret,
-  crypto = require("crypto");
+  atSecret = require("../config/env.config.js").accessTokenSecret,
+  rtSecret = require("../config/env.config.js").refreshTokenSecret,
+  crypto = require("crypto"),
+  UserModel = require("../../users/models/users.model");
 
 exports.verifyRefreshBodyField = (req, res, next) => {
-  if (req.body && req.body.refresh_token) {
+  if (req.body && req.body.refreshToken) {
     return next();
   } else {
-    return res.status(400).send({ error: "need to pass refresh_token field" });
+    return res.status(400).send({ error: "No refresh token found" });
   }
 };
 
+//check if the refresh token is valid. Also check if user access has been revoked
 exports.validRefreshNeeded = (req, res, next) => {
-  let b = Buffer.from(req.body.refresh_token, "base64");
-  //get the stored refresh key from database. If you get the key, it's valid, else client has to re-login.
-  let refresh_token = b.toString();
-  let hash = crypto
-    .createHmac("sha512", req.jwt.refreshKey)
-    .update(req.jwt.userId + secret)
-    .digest("base64");
-  if (hash === refresh_token) {
-    req.body = req.jwt;
-    return next();
-  } else {
+  try {
+    let { userId } = jwt.verify(req.body.refreshToken, rtSecret);
+    UserModel.findById(userId)
+      .then((user) => {
+        if (!user) {
+          return res.status(400).send({ errors: "User not found" });
+        } else if (user.revokeAccess) {
+          return res
+            .status(403)
+            .send({ errors: "Your access has been revoked. Contact admin." });
+        } else {
+          req.body = {
+            userId: user._id,
+            email: user.email,
+            permissionLevel: user.permissionLevel,
+            provider: "email",
+            name: user.firstName + " " + user.lastName,
+            refreshedAt: Math.floor(new Date().getTime() / 1000),
+          };
+          return next();
+        }
+      })
+      .catch(() => res.status(400).send({ errors: "User not found" }));
+  } catch (err) {
     return res.status(400).send({ error: "Invalid refresh token" });
   }
 };
@@ -33,7 +49,7 @@ exports.validJWTNeeded = (req, res, next) => {
       if (authorization[0] !== "Bearer") {
         return res.status(401).send();
       } else {
-        req.jwt = jwt.verify(authorization[1], secret);
+        req.jwt = jwt.verify(authorization[1], atSecret);
         return next();
       }
     } catch (err) {

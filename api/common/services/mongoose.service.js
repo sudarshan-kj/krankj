@@ -7,6 +7,8 @@ let count = 0;
 // let mongoDBUrl = "mongodb://127.0.0.1/test";
 const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD;
 const MONGO_DB_USERNAME = process.env.MONGO_DB_USERNAME;
+// let mongoDBUrl =
+//   "mongodb://127.0.0.1:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 let mongoDBUrl = `mongodb+srv://${MONGO_DB_USERNAME}:${MONGO_DB_PASSWORD}@cluster0.fpezm.mongodb.net/test?retryWrites=true&w=majority`;
 const options = {
   autoIndex: false, // Don't build indexes
@@ -16,6 +18,7 @@ const options = {
   // all other approaches are now deprecated by MongoDB:
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 };
 const connectWithRetry = () => {
   logger.debug("Setting up MongoDB connection with retry");

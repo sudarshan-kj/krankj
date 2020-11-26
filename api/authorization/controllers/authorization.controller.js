@@ -1,32 +1,28 @@
-const jwtSecret = require("../../common/config/env.config.js").jwt_secret;
+const atSecret = require("../../common/config/env.config.js").accessTokenSecret;
+const rtSecret = require("../../common/config/env.config.js")
+  .refreshTokenSecret;
 const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
 
 exports.login = (req, res) => {
   try {
-    let refreshId = req.body.userId + jwtSecret;
-    let salt = crypto.randomBytes(16).toString("base64");
-    let hash = crypto
-      .createHmac("sha512", salt)
-      .update(refreshId)
-      .digest("base64");
-    req.body.refreshKey = salt;
-    let token = jwt.sign(req.body, jwtSecret, {
-      expiresIn: "20s",
+    let accessToken = jwt.sign(req.body, atSecret, {
+      expiresIn: "1m",
     });
-    let b = Buffer.from(hash);
-    let refresh_token = b.toString("base64");
-    res.status(201).send({ accessToken: token, refreshToken: refresh_token });
+    let refreshToken = jwt.sign({ userId: req.body.userId }, rtSecret, {
+      expiresIn: "7d",
+    });
+    return res.status(201).send({ accessToken, refreshToken });
   } catch (err) {
     res.status(500).send({ errors: err });
   }
 };
 
-exports.refresh_token = (req, res) => {
+exports.refresh = (req, res) => {
   try {
-    req.body = req.jwt;
-    let token = jwt.sign(req.body, jwtSecret);
-    res.status(201).send({ id: token });
+    let accessToken = jwt.sign(req.body, atSecret, {
+      expiresIn: "5m",
+    });
+    res.status(201).send({ accessToken });
   } catch (err) {
     res.status(500).send({ errors: err });
   }

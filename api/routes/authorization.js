@@ -13,7 +13,7 @@ authRouter.post("", [
 authRouter.post("/refresh", [
   AuthValidationMiddleware.verifyRefreshBodyField,
   AuthValidationMiddleware.validRefreshNeeded,
-  AuthorizationController.login,
+  AuthorizationController.refresh,
 ]);
 
 module.exports = authRouter;
