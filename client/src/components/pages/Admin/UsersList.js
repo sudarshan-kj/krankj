@@ -28,7 +28,7 @@ const UsersList = () => {
 
   const getUsers = async () => {
     try {
-      const result = await authAxios.get("/api/users");
+      const result = await authAxios.get("/api/users?limit=40&page=0");
       if (Math.floor(result.status / 100) === 2) {
         setUsers(result.data);
       } else {

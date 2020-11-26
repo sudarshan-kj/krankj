@@ -12,11 +12,12 @@ const opts = {
 }; // ensure virtual fields are serialized
 let userSchema = new Schema(
   {
-    firstName: String,
-    lastName: String,
-    email: String,
-    password: String,
+    firstName: { type: String, unique: false, required: true },
+    lastName: { type: String, unique: false, required: true },
+    email: { type: String, unique: true, required: true },
+    password: { type: String, unique: false, required: true },
     permissionLevel: Number,
+    revokeAccess: Boolean,
   },
   opts
 );

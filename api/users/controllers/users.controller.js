@@ -33,9 +33,12 @@ exports.insert = (req, res) => {
     .digest("base64");
   req.body.password = salt + "$" + hash;
   req.body.permissionLevel = setPermissionOnUser(req.body.email);
-  UserModel.createUser(req.body).then((result) => {
-    res.status(201).send({ id: result._id });
-  });
+  req.body.revokeAccess = false;
+  UserModel.createUser(req.body)
+    .then((result) => {
+      res.status(201).send({ id: result._id });
+    })
+    .catch((err) => res.status(400).send({ errors: err }));
 };
 
 exports.list = (req, res) => {
@@ -48,9 +51,11 @@ exports.list = (req, res) => {
       page = Number.isInteger(req.query.page) ? req.query.page : 0;
     }
   }
-  UserModel.list(limit, page).then((result) => {
-    res.status(200).send(result);
-  });
+  UserModel.list(limit, page)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((err) => res.status(500).send({ errors: err }));
 };
 
 exports.getById = (req, res) => {
@@ -58,9 +63,7 @@ exports.getById = (req, res) => {
     .then((result) => {
       res.status(200).send(result);
     })
-    .catch((err) =>
-      res.status(400).send({ error: err.value + " does not exist" })
-    );
+    .catch(() => res.status(400).send({ error: "Userid does not exist" }));
 };
 exports.patchById = (req, res) => {
   if (req.body.password) {
@@ -72,14 +75,16 @@ exports.patchById = (req, res) => {
     req.body.password = salt + "$" + hash;
   }
 
-  UserModel.patchUser(req.params.userId, req.body).then((result) => {
-    res.status(204).send({});
-  });
+  UserModel.patchUser(req.params.userId, req.body)
+    .then((result) => {
+      res.status(204).send({});
+    })
+    .catch((err) => res.status(400).send({ error: "Could not update user" }));
 };
 
 exports.removeById = (req, res) => {
   UserModel.removeById(req.params.userId)
-    .then((result) => {
+    .then(() => {
       res.status(200).send({
         msg: `User id: ${req.params.userId} has been successfully deleted`,
       });
