@@ -8,6 +8,7 @@ import Logout from "../../commons/Logout";
 
 const UsersList = () => {
   const [users, setUsers] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
   const history = useHistory();
 
   const authAxios = axios.create({
@@ -34,13 +35,17 @@ const UsersList = () => {
       } else {
         handleLogout();
       }
+      setIsLoading(false);
     } catch (err) {
       handleLogout();
       console.error("Invalid token");
     }
   };
+  if (isLoading) {
+    return <div className={styles.mainContainer}> Loading...</div>;
+  }
   return (
-    <div className={styles.mainContainer}>
+    <div className={`${styles.mainContainer} ${styles.fadeIn}`}>
       <Logout />
       <table>
         <thead>
