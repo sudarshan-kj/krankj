@@ -50,8 +50,11 @@ const App = () => {
             <Route path="/gallery" component={Gallery} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
-            <Route path="/adminLogin" component={Admin} />
-            <ProtectedRoute path="/usersList" component={UsersList} />
+            <Route path="/admin/login" component={Admin} />
+            <ProtectedRoute
+              path="/admin/contactedUsers"
+              component={UsersList}
+            />
             <Redirect to="/home" />
           </Switch>
         </Main>

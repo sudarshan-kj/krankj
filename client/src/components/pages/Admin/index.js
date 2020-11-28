@@ -1,10 +1,18 @@
 import React from "react";
-import AdminForm from "./AdminForm";
+import AdminLoginForm from "./AdminLoginForm";
 import { isAuthenticated } from "../../../utils/Auth";
-import UsersList from "./UsersList";
+import { useHistory } from "react-router-dom";
 
 const Admin = () => {
-  return <>{!isAuthenticated() ? <AdminForm /> : <UsersList />}</>;
+  const history = useHistory();
+  if (isAuthenticated()) {
+    history.push("/admin/contactedUsers");
+  }
+  return (
+    <>
+      <AdminLoginForm />
+    </>
+  );
 };
 
 export default Admin;

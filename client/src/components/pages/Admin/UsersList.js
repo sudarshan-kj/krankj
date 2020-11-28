@@ -19,8 +19,8 @@ const UsersList = () => {
   });
 
   const handleLogout = () => {
+    history.push("/admin/login");
     logout();
-    history.push("/adminLogin");
   };
 
   React.useEffect(() => {

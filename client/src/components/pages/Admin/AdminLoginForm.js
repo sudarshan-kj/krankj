@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./AdminForm.module.css";
+import styles from "./AdminLoginForm.module.css";
 import axios from "axios";
 import { API_ENDPOINT } from "../../../constants";
 import { useFormik } from "formik";
@@ -21,7 +21,7 @@ const yupValidationObject = Yup.object({
     .max(MAX_PWD_LENGTH, "Too long")
     .required("Enter password"),
 });
-const AdminForm = () => {
+const AdminLoginForm = () => {
   const [loginError, setLoginError] = React.useState("");
   const history = useHistory();
 
@@ -31,7 +31,7 @@ const AdminForm = () => {
       .then((res) => {
         if (res.data.accessToken) {
           localStorage.setItem("token", res.data.accessToken);
-          history.push("/usersList");
+          history.push("/admin/contactedUsers");
         } else {
           throw new Error("Missing access token");
         }
@@ -104,4 +104,4 @@ const AdminForm = () => {
   );
 };
 
-export default AdminForm;
+export default AdminLoginForm;

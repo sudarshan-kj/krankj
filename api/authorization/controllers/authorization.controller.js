@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 exports.login = (req, res) => {
   try {
     let accessToken = jwt.sign(req.body, atSecret, {
-      expiresIn: "1m",
+      expiresIn: "1h",
     });
     let refreshToken = jwt.sign({ userId: req.body.userId }, rtSecret, {
       expiresIn: "7d",

@@ -1,12 +1,13 @@
 import React from "react";
+import { isAuthenticated } from "../../utils/Auth";
 import { Route, Redirect } from "react-router-dom";
 
 const ProtectedRoute = ({ path, component }) => {
-  const isAuthenticated = localStorage.getItem("auth");
-  return isAuthenticated ? (
+  const isAuth = isAuthenticated();
+  return isAuth ? (
     <Route to={path} component={component} />
   ) : (
-    <Redirect to="/adminLogin" />
+    <Redirect to="/admin/login" />
   );
 };
 

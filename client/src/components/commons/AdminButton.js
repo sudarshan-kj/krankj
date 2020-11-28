@@ -19,7 +19,7 @@ const StyledDiv = styled.div`
 const AdminButton = () => {
   return (
     <StyledDiv>
-      <Link to="/adminLogin">
+      <Link to="/admin/login">
         <StyledAdminButton />
       </Link>
     </StyledDiv>
