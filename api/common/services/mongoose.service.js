@@ -7,7 +7,6 @@ let count = 0;
 const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD;
 const MONGO_DB_USERNAME = process.env.MONGO_DB_USERNAME;
 const currentEnv = process.env.VERCEL_ENV;
-logger.info("Current env is", currentEnv);
 let mongoDBUrl =
   "mongodb://127.0.0.1:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 if (currentEnv === "production") {
