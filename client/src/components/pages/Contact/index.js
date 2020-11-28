@@ -51,6 +51,7 @@ const yupValidationObject = Yup.object({
 });
 
 const Contact = () => {
+  console.log("Node env is", process.env.NODE_ENV);
   const [submit, dispatchSubmit] = React.useReducer(submitReducer, {
     message: "",
     success: false,
