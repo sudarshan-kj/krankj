@@ -37,11 +37,8 @@ const AdminForm = () => {
         }
       })
       .catch((err) => {
-        if (err.response.status === 429) {
-          setLoginError("Something went wrong");
-        } else {
-          setLoginError("Invalid user/password");
-        }
+        console.log("Error i", err);
+        setLoginError("Invalid user/password");
       });
   };
 
