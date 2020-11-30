@@ -13,7 +13,7 @@ const opts = {
       delete ret.revokeAccess;
     },
   },
-}; // ensure virtual fields are serialized
+};
 let userSchema = new Schema(
   {
     firstName: { type: String, unique: false, required: true },
